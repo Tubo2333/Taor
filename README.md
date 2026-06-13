@@ -6,6 +6,8 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)]()
 [![Lines](https://img.shields.io/badge/lines-~8,600-blue)]()
 
+> 📖 完全使用手册：[Taor_完全使用手册.docx](docs/Taor_完全使用手册.docx) — 从零搭建 AI Agent，10 步 + 3 个附录，事无巨细
+
 ## Quick Start
 
 ```bash
