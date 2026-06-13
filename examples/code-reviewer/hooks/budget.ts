@@ -12,7 +12,7 @@
  * Cost estimation: $5.00 allows roughly 1.6M input or 330K output tokens on sonnet.
  */
 
-import type { HookRegistration, HookInput } from "@harness/hooks"
+import type { HookRegistration, HookInput } from "@taor/hooks"
 
 // Default pricing (claude-sonnet-4-6) — used when no adapter is provided
 const DEFAULT_INPUT_COST_PER_1K = 0.003

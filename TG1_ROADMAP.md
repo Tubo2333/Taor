@@ -1,4 +1,4 @@
-# Harness Engine — TG1 路线图
+# Taor — TG1 路线图
 
 > **起点**：TG0 (6,100 行, 9 包, 113 审查闭环)
 > **目标**：生产可用的 AI Agent 运行时
@@ -124,7 +124,7 @@ TG0 用 regex 解析 `@resource:fs-path` → 迁移到 Zod `.annotations()` 或 
 - `harness config` — 生成配置模板
 - `harness tool` — 脚手架生成工具
 
-**工作量**：~300 行。新增 `@harness/cli` 包。
+**工作量**：~300 行。新增 `@taor/cli` 包。
 
 ### C2. 文档
 - API 参考（TypeDoc 自动生成）

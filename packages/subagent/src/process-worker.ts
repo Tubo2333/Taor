@@ -1,9 +1,9 @@
-// @harness/subagent — ProcessWorker (child_process.fork isolation)
+// @taor/subagent — ProcessWorker (child_process.fork isolation)
 
 import { fork, type ChildProcess } from "node:child_process"
 import { fileURLToPath } from "node:url"
 import { dirname, resolve } from "node:path"
-import type { TokenUsage } from "@harness/core"
+import type { TokenUsage } from "@taor/core"
 import type { SubagentSpec, SubagentResult } from "./types.js"
 import type { SubagentHandleImpl } from "./handle.js"
 

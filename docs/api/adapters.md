@@ -52,7 +52,7 @@ DeepSeekAdapter.requiredEnvVars   // → ["DEEPSEEK_API_KEY"]
 ### Option A: Extend `OpenAICompatibleAdapter` (recommended for OpenAI-compatible APIs)
 
 ```typescript
-import { OpenAICompatibleAdapter } from "@harness/adapters"
+import { OpenAICompatibleAdapter } from "@taor/adapters"
 
 export class MyAdapter extends OpenAICompatibleAdapter {
   static readonly requiredEnvVars = ["MY_API_KEY"]

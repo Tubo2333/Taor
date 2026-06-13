@@ -6,8 +6,8 @@
  */
 
 import { describe, it, expect } from "vitest"
-import { DeepSeekAdapter } from "@harness/adapters"
-import type { ModelInfo } from "@harness/adapters"
+import { DeepSeekAdapter } from "@taor/adapters"
+import type { ModelInfo } from "@taor/adapters"
 
 describe("GAP-9 / Gate 3: DeepSeek Adapter", () => {
   // ── Test 1: Construction ──

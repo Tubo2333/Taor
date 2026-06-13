@@ -1,15 +1,15 @@
-# TG0 Step 11 — @harness/memory 交付总结
+# TG0 Step 11 — @taor/memory 交付总结
 
 > **完成时间**：2026-06-12
 > **审查状态**：⏳ 待交叉审查
-> **上一步**：Step 10 @harness/subagent（含 12 条审查修复）
-> **下一步**：Step 12 @harness/compressor
+> **上一步**：Step 10 @taor/subagent（含 12 条审查修复）
+> **下一步**：Step 12 @taor/compressor
 
 ---
 
 ## 一、做了什么
 
-实现了 `@harness/memory` 包 — 三层记忆系统（user → project → session），3 种后端（InMemory/Json/Sqlite），集成到 harness.ts 的 `harness.memory` 访问器。
+实现了 `@taor/memory` 包 — 三层记忆系统（user → project → session），3 种后端（InMemory/Json/Sqlite），集成到 harness.ts 的 `harness.memory` 访问器。
 
 ### 文件清单
 
@@ -63,16 +63,16 @@ new MemoryFacade({
 ### 2.4 依赖反转
 
 ```
-@harness/core (harness.ts)
+@taor/core (harness.ts)
   ├── IMemoryFacade   ← 结构接口（user/project/session 各含 6 个方法）
   ├── setMemory()     ← 注入方法
   └── memory getter   ← 返回注入的 facade
 
-@harness/memory
+@taor/memory
   ├── MemoryFacade    ← 真实实现
   └── store.ts        ← 3 种后端
 
-@harness/engine (index.ts)
+@taor/engine (index.ts)
   └── createHarness() ← 组装 + 注入
 ```
 
@@ -122,6 +122,6 @@ new MemoryFacade({
 
 ```
 1-11 ✅ (92%)
-12   ⬜ @harness/compressor    ← 下一步（最后一步）
-E    ⬜ @harness/engine (冒烟测试)
+12   ⬜ @taor/compressor    ← 下一步（最后一步）
+E    ⬜ @taor/engine (冒烟测试)
 ```

@@ -1,8 +1,8 @@
-# @harness/tools — Adversarial Review (TG0 Step 4)
+# @taor/tools — Adversarial Review (TG0 Step 4)
 
 > **审查人视角**：TypeScript 框架设计专家，你刚把它写完，觉得"差不多能跑"。我的工作是证明它不能。
 > **审查日期**：2026-06-11
-> **审查范围**：`@harness/tools` 全部 5 个源文件 + 上游依赖（core/types、core/context、core/config）+ tsconfig.base.json + TG0_DEFERRED.md
+> **审查范围**：`@taor/tools` 全部 5 个源文件 + 上游依赖（core/types、core/context、core/config）+ tsconfig.base.json + TG0_DEFERRED.md
 
 ---
 

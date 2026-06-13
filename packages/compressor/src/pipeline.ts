@@ -1,7 +1,7 @@
-// @harness/compressor — 5-layer cheap-first compression pipeline
+// @taor/compressor — 5-layer cheap-first compression pipeline
 
 import type { CompressorConfig, CompressStrategy, CompressedContext } from "./types.js"
-import type { TurnContext } from "@harness/core"
+import type { TurnContext } from "@taor/core"
 import { DEFAULT_STRATEGIES, messagesToTokens } from "./strategies/index.js"
 
 // ═══════════════════════════════════════════════════════════════════

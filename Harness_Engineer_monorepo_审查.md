@@ -1,4 +1,4 @@
-# Harness Engine — Monorepo 工程化审查
+# Taor — Monorepo 工程化审查
 
 > **审查人视角**：未参与设计讨论的 npm monorepo 工程化专家（8 年+，20+ 包 TS monorepo）。只关心 `npm install && npm run build` 能不能跑通。
 > **审查日期**：2026-06-11
@@ -21,7 +21,7 @@ tsc --noEmit (core):
 tsc --noEmit (hooks):
   TS1295 ×1  (import/export in CJS)
   TS1287 ×1  (verbatimModuleSyntax + CJS)
-  TS2307 ×8  (cannot find @harness/* modules)
+  TS2307 ×8  (cannot find @taor/* modules)
 
 tsc --noEmit (subagent):
   TS1287 ×3  + TS1295 ×2  + TS2307 ×3
@@ -92,7 +92,7 @@ tsc --noEmit (subagent):
 **修正**：给**全部 9 个 package.json** 加 `"type": "module"`：
 ```json
 {
-  "name": "@harness/core",
+  "name": "@taor/core",
   "type": "module",
   ...
 }
@@ -103,16 +103,16 @@ tsc --noEmit (subagent):
 
 ---
 
-### F-3. `@harness/hooks/tsconfig.json` 的 `references` 数组不完整 — 缺少 `adapters` 和 `tools`
+### F-3. `@taor/hooks/tsconfig.json` 的 `references` 数组不完整 — 缺少 `adapters` 和 `tools`
 
 **文件**：`d:/C-file/Harness_Engineer/packages/hooks/tsconfig.json`
 
 hooks 的 package.json 声明了三个依赖：
 ```json
 "dependencies": {
-  "@harness/core": "*",
-  "@harness/adapters": "*",
-  "@harness/tools": "*"
+  "@taor/core": "*",
+  "@taor/adapters": "*",
+  "@taor/tools": "*"
 }
 ```
 
@@ -125,7 +125,7 @@ hooks 的 package.json 声明了三个依赖：
 
 缺失 `{ "path": "../adapters" }` 和 `{ "path": "../tools" }`。
 
-`hooks/src/types.ts` 直接从 `@harness/adapters` 和 `@harness/tools` 导入类型（`ThinkEvent`、`ToolResult`）。在 composite 模式下，TypeScript 通过 project references 解析跨包类型声明。缺少 references 意味着：
+`hooks/src/types.ts` 直接从 `@taor/adapters` 和 `@taor/tools` 导入类型（`ThinkEvent`、`ToolResult`）。在 composite 模式下，TypeScript 通过 project references 解析跨包类型声明。缺少 references 意味着：
 1. 构建调度器不知道 hooks 需要 adapters/tools 先构建 → 可能并行构建导致 `dist/index.d.ts` 不存在时报错
 2. 单独在 hooks 目录下 `tsc --build` 会因为找不到已构建的 declaration 文件而失败
 
@@ -213,11 +213,11 @@ import type { CompressLevel } from "./types.js"
 
 ## 🟡 重要（编译可通过但存在工程风险）
 
-### I-1. `@harness/core/src/unresolved.ts` 存根类型与真实类型不一致
+### I-1. `@taor/core/src/unresolved.ts` 存根类型与真实类型不一致
 
 **文件**：`d:/C-file/Harness_Engineer/packages/core/src/unresolved.ts`
 
-core 包定义了一组"占位"类型来避免循环依赖（`@harness/adapters` 依赖 core，core 的 `HarnessConfig` 又要引用 adapter 的类型）。但这些占位类型与各包的真实定义不同：
+core 包定义了一组"占位"类型来避免循环依赖（`@taor/adapters` 依赖 core，core 的 `HarnessConfig` 又要引用 adapter 的类型）。但这些占位类型与各包的真实定义不同：
 
 | 占位 (core) | 真实定义 | 差异 |
 |---|---|---|
@@ -261,7 +261,7 @@ core 包定义了一组"占位"类型来避免循环依赖（`@harness/adapters`
 
 API 设计 §十三指定了 `builtin/read.ts, write.ts, edit.ts, bash.ts, glob.ts, grep.ts, index.ts` 和 `strategies/trim.ts, summarize.ts, chunk.ts, embed.ts, truncate.ts`。目录存在但无文件。
 
-编译器不管空目录（不会报错），但 `@harness/engine` 的 index.ts 没有从 builtin 或 strategies 导入任何内容——即使用了这些目录将来有文件，也**没有任何代码路径会加载它们**。`@harness/tools/src/index.ts` 没有 `export * from "./builtin/index.js"`，`@harness/compressor/src/index.ts` 没有 `export * from "./strategies/..."`。
+编译器不管空目录（不会报错），但 `@taor/engine` 的 index.ts 没有从 builtin 或 strategies 导入任何内容——即使用了这些目录将来有文件，也**没有任何代码路径会加载它们**。`@taor/tools/src/index.ts` 没有 `export * from "./builtin/index.js"`，`@taor/compressor/src/index.ts` 没有 `export * from "./strategies/..."`。
 
 如果这是 "TG0 后再加" 的策略——没问题。但如果有人现在看文件树就觉得 "builtin 工具有了"——那是幻觉。
 
@@ -273,20 +273,20 @@ API 设计 §十三指定了 `builtin/read.ts, write.ts, edit.ts, bash.ts, glob.
 
 ## 🟢 可延后（不影响编译，但会在后续阶段造成摩擦）
 
-### D-1. `@harness/subagent` 对 `zod` 的 phantom dependency
+### D-1. `@taor/subagent` 对 `zod` 的 phantom dependency
 
 **文件**：`d:/C-file/Harness_Engineer/packages/subagent/src/types.ts` 行 5: `import type { z } from "zod"`
 
-`@harness/subagent/package.json` 的 `dependencies` 和 `devDependencies` 都没有 `zod`。`zod` 可用纯粹因为 npm workspaces 的 hoisting——它在根 `node_modules` 中作为 `@harness/tools` 的依赖被安装。
+`@taor/subagent/package.json` 的 `dependencies` 和 `devDependencies` 都没有 `zod`。`zod` 可用纯粹因为 npm workspaces 的 hoisting——它在根 `node_modules` 中作为 `@taor/tools` 的依赖被安装。
 
 如果将来：
 - 切换到 pnpm（strict isolation，未声明的依赖不可访问）
-- 把 `@harness/subagent` 提取为独立仓库
+- 把 `@taor/subagent` 提取为独立仓库
 - 有人 `npm install` 时用了 `--legacy-peer-deps` 导致 hoisting 行为变化
 
 → `zod` 类型解析失败，`SubagentSpec.schema` 的类型变成 `any`。
 
-**修正**：`@harness/subagent/package.json` 加：
+**修正**：`@taor/subagent/package.json` 加：
 ```json
 "devDependencies": {
   "zod": "^3.23.0",
@@ -294,7 +294,7 @@ API 设计 §十三指定了 `builtin/read.ts, write.ts, edit.ts, bash.ts, glob.
 }
 ```
 
-✅ **已修正**：`@harness/subagent/package.json` devDependencies 添加 `"zod": "^3.23.0"`。
+✅ **已修正**：`@taor/subagent/package.json` devDependencies 添加 `"zod": "^3.23.0"`。
 或者如果 schema 功能确实需要 runtime zod，放 `"dependencies"`。
 
 ---
@@ -303,19 +303,19 @@ API 设计 §十三指定了 `builtin/read.ts, write.ts, edit.ts, bash.ts, glob.
 
 **文件**：全部 9 个 `packages/*/package.json`
 
-根 package.json `"private": true` 对于 monorepo 是正确的。但每个子包也设了 `"private": true`。如果要发布 `@harness/core` 到 npm，需要改为 `false` 或删除该字段。这不是 bug，但值得在发布 checklist 中记录。
+根 package.json `"private": true` 对于 monorepo 是正确的。但每个子包也设了 `"private": true`。如果要发布 `@taor/core` 到 npm，需要改为 `false` 或删除该字段。这不是 bug，但值得在发布 checklist 中记录。
 
 ---
 
-### D-3. `@harness/engine` 的 re-export 有致命时炸弹
+### D-3. `@taor/engine` 的 re-export 有致命时炸弹
 
 **文件**：`d:/C-file/Harness_Engineer/packages/engine/src/index.ts`
 
 ```typescript
-export { Harness } from "@harness/core"
+export { Harness } from "@taor/core"
 ```
 
-如果将来 `@harness/core` 的 `Harness` 类改为 `export default` 或改名，engine 包的 re-export 会直接断裂。engine 作为聚合包，本质上是所有子系统的"别名层"——它引入了一个额外的断裂点却没有额外的封装价值（用户完全可以直接 `import { Harness } from "@harness/core"`）。
+如果将来 `@taor/core` 的 `Harness` 类改为 `export default` 或改名，engine 包的 re-export 会直接断裂。engine 作为聚合包，本质上是所有子系统的"别名层"——它引入了一个额外的断裂点却没有额外的封装价值（用户完全可以直接 `import { Harness } from "@taor/core"`）。
 
 **修正**：至少在 engine 的 index.ts 中加集成测试（一个简单的 `createHarness` 冒烟测试），防止 re-export 断裂。
 

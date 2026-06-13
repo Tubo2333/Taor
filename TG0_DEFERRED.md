@@ -9,7 +9,7 @@
 
 ---
 
-## 阶段 1：@harness/core（types → context → events → config → harness）
+## 阶段 1：@taor/core（types → context → events → config → harness）
 
 | ID | 来源 | 描述 | 触发文件 | 动作 |
 |----|------|------|---------|------|
@@ -18,17 +18,17 @@
 
 ---
 
-## 阶段 2：@harness/tools（defineTool + Tool 类 + ToolRegistry）
+## 阶段 2：@taor/tools（defineTool + Tool 类 + ToolRegistry）
 
 | ID | 来源 | 描述 | 触发文件 | 动作 |
 |----|------|------|---------|------|
 | [x] | API-D1 | `defineTool()` Zod/JSONSchema 双重重载可能导致 TS 推断失效 | `packages/tools/src/descriptor.ts` | ✅ TG2: smoke tests exercise defineTool with ToolRegistry onConflict tests covering registration paths |
-| [x] | API-D7 | `zod-to-json-schema` 依赖未在 `@harness/tools/package.json` 声明 | `packages/tools/package.json` | ✅ 已添加 `zod-to-json-schema: ^3.25.2` 到 dependencies，`defineTool()` Zod→JSONSchema 转换已实现，`Tool.toDescriptor()` 已实现 |
+| [x] | API-D7 | `zod-to-json-schema` 依赖未在 `@taor/tools/package.json` 声明 | `packages/tools/package.json` | ✅ 已添加 `zod-to-json-schema: ^3.25.2` 到 dependencies，`defineTool()` Zod→JSONSchema 转换已实现，`Tool.toDescriptor()` 已实现 |
 | [x] | API-S4 | `ToolRegistry.register()` 冲突处理仅 throw，不支持 skip/override | `packages/tools/src/registry.ts` | ✅ TG2 B4: onConflict option implemented (throw/skip/override) |
 
 ---
 
-## 阶段 3：@harness/adapters（LLMAdapter + AnthropicAdapter）
+## 阶段 3：@taor/adapters（LLMAdapter + AnthropicAdapter）
 
 | ID | 来源 | 描述 | 触发文件 | 动作 |
 |----|------|------|---------|------|
@@ -36,7 +36,7 @@
 
 ---
 
-## 阶段 4：@harness/core/harness.ts（Harness 主类）
+## 阶段 4：@taor/core/harness.ts（Harness 主类）
 
 | ID | 来源 | 描述 | 触发文件 | 动作 |
 |----|------|------|---------|------|
@@ -44,7 +44,7 @@
 
 ---
 
-## 阶段 5：@harness/permission
+## 阶段 5：@taor/permission
 
 | ID | 来源 | 描述 | 触发文件 | 动作 |
 |----|------|------|---------|------|
@@ -52,7 +52,7 @@
 
 ---
 
-## 阶段 6：@harness/hooks
+## 阶段 6：@taor/hooks
 
 | ID | 来源 | 描述 | 触发文件 | 动作 |
 |----|------|------|---------|------|
@@ -60,7 +60,7 @@
 
 ---
 
-## 阶段 7：@harness/subagent
+## 阶段 7：@taor/subagent
 
 | ID | 来源 | 描述 | 触发文件 | 动作 |
 |----|------|------|---------|------|
@@ -68,7 +68,7 @@
 
 ---
 
-## 阶段 8：@harness/memory
+## 阶段 8：@taor/memory
 
 | ID | 来源 | 描述 | 触发文件 | 动作 |
 |----|------|------|---------|------|
@@ -76,7 +76,7 @@
 
 ---
 
-## 阶段 9：@harness/compressor
+## 阶段 9：@taor/compressor
 
 | ID | 来源 | 描述 | 触发文件 | 动作 |
 |----|------|------|---------|------|
@@ -84,11 +84,11 @@
 
 ---
 
-## 阶段 10：@harness/engine（聚合包）
+## 阶段 10：@taor/engine（聚合包）
 
 | ID | 来源 | 描述 | 触发文件 | 动作 |
 |----|------|------|---------|------|
-| [x] | mono-D3 | `@harness/engine` re-export 别名层极脆 —— 任何子包改名/改导出方式都会断裂 | `packages/engine/src/index.ts` | ✅ TG0: 10/10 smoke tests including createHarness() non-throw |
+| [x] | mono-D3 | `@taor/engine` re-export 别名层极脆 —— 任何子包改名/改导出方式都会断裂 | `packages/engine/src/index.ts` | ✅ TG0: 10/10 smoke tests including createHarness() non-throw |
 
 ---
 

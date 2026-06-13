@@ -2,7 +2,7 @@
  * DeepSeek adapter — real API smoke test (Gate 3)
  * Requires: DEEPSEEK_API_KEY env var
  */
-import { DeepSeekAdapter } from "@harness/adapters"
+import { DeepSeekAdapter } from "@taor/adapters"
 
 async function main() {
   const adapter = new DeepSeekAdapter()

@@ -1,4 +1,4 @@
-// @harness/mcp — MCP server configuration types
+// @taor/mcp — MCP server configuration types
 
 /**
  * MCP server transport configuration.

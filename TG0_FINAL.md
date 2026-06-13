@@ -1,4 +1,4 @@
-# Harness Engine — TG0 最终交付文档
+# Taor — TG0 最终交付文档
 
 > **完成日期**：2026-06-12
 > **状态**：✅ 可交付
@@ -8,7 +8,7 @@
 
 ## 一、项目概述
 
-**Harness Engine** — 开源 TypeScript AI Agent 运行时框架。基于 TAOR 循环 (Think→Act→Observe→Repeat) 的双向 AsyncGenerator 状态机，提供 6 个可注入子系统（权限/钩子/子代理/记忆/压缩），通过结构接口依赖反转实现零循环引用的模块化架构。
+**Taor** — 开源 TypeScript AI Agent 运行时框架。基于 TAOR 循环 (Think→Act→Observe→Repeat) 的双向 AsyncGenerator 状态机，提供 6 个可注入子系统（权限/钩子/子代理/记忆/压缩），通过结构接口依赖反转实现零循环引用的模块化架构。
 
 ---
 
@@ -31,15 +31,15 @@
 ## 三、包结构
 
 ```
-@harness/engine          — 聚合入口 (createHarness)
-├── @harness/core        — 核心类型 + config + TAOR 循环
-├── @harness/tools       — defineTool/tool()/Tool → ToolRegistry
-├── @harness/adapters    — LLMAdapter → AnthropicAdapter (完整)
-├── @harness/permission  — PermissionEngine (4级: deny/boundary/allow/ask)
-├── @harness/hooks       — HookRegistry (13 钩子点)
-├── @harness/subagent    — SubagentCoordinator/Worker/Handle (inline 隔离)
-├── @harness/memory      — MemoryFacade (3层) + 3 后端
-└── @harness/compressor  — CompressorPipeline (5层: trim→...→truncate)
+@taor/engine          — 聚合入口 (createHarness)
+├── @taor/core        — 核心类型 + config + TAOR 循环
+├── @taor/tools       — defineTool/tool()/Tool → ToolRegistry
+├── @taor/adapters    — LLMAdapter → AnthropicAdapter (完整)
+├── @taor/permission  — PermissionEngine (4级: deny/boundary/allow/ask)
+├── @taor/hooks       — HookRegistry (13 钩子点)
+├── @taor/subagent    — SubagentCoordinator/Worker/Handle (inline 隔离)
+├── @taor/memory      — MemoryFacade (3层) + 3 后端
+└── @taor/compressor  — CompressorPipeline (5层: trim→...→truncate)
 ```
 
 **各包代码量**：
@@ -96,13 +96,13 @@ harness.start(prompt)
 
 | Structural | Canonical | 来源 |
 |------------|-----------|------|
-| IAdapter | LLMAdapter | @harness/adapters |
-| IToolRegistry | ToolRegistry | @harness/tools |
-| IPermissionEngine | PermissionEngine | @harness/permission |
-| IHookRegistry | HookRegistry | @harness/hooks |
-| ISubagentCoordinator | SubagentCoordinator | @harness/subagent |
-| IMemoryFacade | MemoryFacade | @harness/memory |
-| ICompressorPipeline | CompressorPipeline | @harness/compressor |
+| IAdapter | LLMAdapter | @taor/adapters |
+| IToolRegistry | ToolRegistry | @taor/tools |
+| IPermissionEngine | PermissionEngine | @taor/permission |
+| IHookRegistry | HookRegistry | @taor/hooks |
+| ISubagentCoordinator | SubagentCoordinator | @taor/subagent |
+| IMemoryFacade | MemoryFacade | @taor/memory |
+| ICompressorPipeline | CompressorPipeline | @taor/compressor |
 
 ---
 
@@ -149,15 +149,15 @@ harness.start(prompt)
 
 | 审查 | 范围 | 条数 | 状态 |
 |------|------|------|------|
-| Step 4 审查 | @harness/tools | 28 | ✅ |
+| Step 4 审查 | @taor/tools | 28 | ✅ |
 | Step 1-5 综合 | core + tools + adapters | 17 | ✅ |
 | Step 1-6 综合 | + config | 19 | ✅ |
 | Step 7 TAOR | harness.ts | 16 | ✅ |
-| Step 8 Permission | @harness/permission | 9 | ✅ |
-| Step 9 Hooks | @harness/hooks | 8 | ✅ |
-| Step 10 Subagent | @harness/subagent | 12 | ✅ |
-| Step 11 Memory | @harness/memory | 9 | ✅ |
-| Step 12 Compressor | @harness/compressor | 10 | ✅ |
+| Step 8 Permission | @taor/permission | 9 | ✅ |
+| Step 9 Hooks | @taor/hooks | 8 | ✅ |
+| Step 10 Subagent | @taor/subagent | 12 | ✅ |
+| Step 11 Memory | @taor/memory | 9 | ✅ |
+| Step 12 Compressor | @taor/compressor | 10 | ✅ |
 | TG0 全 12 步交叉审查 | 7 维度 | 6 (P0) + 5 (P1) | ✅ |
 | **总计** | | **113** | **全部闭环** |
 
@@ -167,17 +167,17 @@ harness.start(prompt)
 
 ```bash
 git add -A
-git commit -m "feat: TG0 complete — Harness Engine AI agent runtime
+git commit -m "feat: TG0 complete — Taor AI agent runtime
 
 9 packages, ~6,100 lines TypeScript, zero build errors.
 TAOR loop (AsyncGenerator) + 6 subsystems:
-- @harness/tools: defineTool/tool()/Tool → ToolRegistry
-- @harness/adapters: LLMAdapter → AnthropicAdapter (650 lines)
-- @harness/permission: 4-tier PermissionEngine
-- @harness/hooks: 13-point HookRegistry
-- @harness/subagent: inline SubagentCoordinator/Worker
-- @harness/memory: 3-layer MemoryFacade (InMemory/Json/Sqlite)
-- @harness/compressor: 5-layer CompressorPipeline
+- @taor/tools: defineTool/tool()/Tool → ToolRegistry
+- @taor/adapters: LLMAdapter → AnthropicAdapter (650 lines)
+- @taor/permission: 4-tier PermissionEngine
+- @taor/hooks: 13-point HookRegistry
+- @taor/subagent: inline SubagentCoordinator/Worker
+- @taor/memory: 3-layer MemoryFacade (InMemory/Json/Sqlite)
+- @taor/compressor: 5-layer CompressorPipeline
 
 113 adversarial review fixes applied. 10/10 smoke tests pass."
 ```

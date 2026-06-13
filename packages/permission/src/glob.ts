@@ -1,4 +1,4 @@
-// @harness/permission — glob pattern matching for tool name rules
+// @taor/permission — glob pattern matching for tool name rules
 //
 // TG0: Self-contained implementation — no external glob library dependency.
 // Handles only the patterns needed for PermissionRule matching:

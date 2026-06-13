@@ -1,12 +1,12 @@
-// @harness/core — Harness main class (AsyncGenerator + EventEmitter + TAOR loop)
+// @taor/core — Harness main class (AsyncGenerator + EventEmitter + TAOR loop)
 //
 // ## Dependency inversion
 //
-// `@harness/core` cannot runtime-import from `@harness/adapters` or `@harness/tools`
+// `@taor/core` cannot runtime-import from `@taor/adapters` or `@taor/tools`
 // (circular project references). Instead, the Harness constructor receives
 // pre-instantiated `IAdapter` and `IToolRegistry` objects that satisfy
 // structural interfaces defined below. The `createHarness()` factory in
-// `@harness/engine` wires everything together.
+// `@taor/engine` wires everything together.
 
 import type { ResolvedConfig, Logger } from "./config.js"
 import type { HarnessEvent, UserDecision } from "./events.js"
@@ -33,7 +33,7 @@ export type { TurnRecord } from "./types.js"
 // ─── Structural interfaces (dependency inversion) ───
 // ═══════════════════════════════════════════════════════════════════
 
-/** Result of a tool execution (structural — matches @harness/tools ToolResult). */
+/** Result of a tool execution (structural — matches @taor/tools ToolResult). */
 interface ToolExecResult {
   ok: boolean
   data?: unknown
@@ -61,7 +61,7 @@ interface ToolExecContext {
   logger: Logger
 }
 
-/** Structural adapter interface — satisfied by LLMAdapter from @harness/adapters. */
+/** Structural adapter interface — satisfied by LLMAdapter from @taor/adapters. */
 export interface IAdapter {
   readonly provider: string
   readonly version?: string
@@ -98,7 +98,7 @@ interface AdapterRequestOpts {
   tools?: unknown[]
 }
 
-/** Structural think event — satisfied by ThinkEvent from @harness/adapters. */
+/** Structural think event — satisfied by ThinkEvent from @taor/adapters. */
 type ThinkEvent =
   | { type: "text"; content: string }
   | { type: "thinking"; content: string }
@@ -106,7 +106,7 @@ type ThinkEvent =
   | { type: "stop"; reason: string; usage: TokenUsage }
   | { type: "error"; error: HarnessError }
 
-/** Structural tool registry — satisfied by ToolRegistry from @harness/tools. */
+/** Structural tool registry — satisfied by ToolRegistry from @taor/tools. */
 export interface IToolRegistry {
   register(inputs: unknown[]): void
   get(name: string): ToolDef | undefined
@@ -116,14 +116,14 @@ export interface IToolRegistry {
   clear(): void
 }
 
-/** Structural permission verdict — satisfied by PermissionVerdict from @harness/permission. */
+/** Structural permission verdict — satisfied by PermissionVerdict from @taor/permission. */
 interface IPermissionVerdict {
   level: "deny" | "boundary" | "allow" | "ask"
   reason: string
   rule?: { level: string; pattern: string; reason?: string }
 }
 
-/** Structural permission engine — satisfied by PermissionEngine from @harness/permission. */
+/** Structural permission engine — satisfied by PermissionEngine from @taor/permission. */
 export interface IPermissionEngine {
   evaluate(tool: string, params: Record<string, unknown>): IPermissionVerdict
   addRule(rule: {
@@ -143,7 +143,7 @@ export interface IPermissionEngine {
   resetScope(): void
 }
 
-/** Structural hook registry — satisfied by HookRegistry from @harness/hooks. */
+/** Structural hook registry — satisfied by HookRegistry from @taor/hooks. */
 export interface IHookRegistry {
   execute(hook: string, ...args: unknown[]): Promise<unknown[]>
   on(hook: string, handler: (...args: unknown[]) => Promise<unknown>, opts?: {
@@ -156,7 +156,7 @@ export interface IHookRegistry {
   offAll(hook: string): void
 }
 
-/** Structural subagent coordinator — satisfied by SubagentCoordinator from @harness/subagent. */
+/** Structural subagent coordinator — satisfied by SubagentCoordinator from @taor/subagent. */
 export interface ISubagentCoordinator {
   spawn(spec: {
     description: string
@@ -184,7 +184,7 @@ export interface ISubagentCoordinator {
   }>
 }
 
-/** Structural memory facade — satisfied by MemoryFacade from @harness/memory. */
+/** Structural memory facade — satisfied by MemoryFacade from @taor/memory. */
 export interface IMemoryFacade {
   readonly backendType?: { user: string; project: string; session: string }
   readonly user: {
@@ -213,7 +213,7 @@ export interface IMemoryFacade {
   }
 }
 
-/** Structural compressor pipeline — satisfied by CompressorPipeline from @harness/compressor. */
+/** Structural compressor pipeline — satisfied by CompressorPipeline from @taor/compressor. */
 export interface ICompressorPipeline {
   readonly triggerThreshold?: number
   compress(ctx: TurnContext): Promise<{
@@ -1689,13 +1689,13 @@ export class Harness
   }
 
   // ═══════════════════════════════════════════════════════════════
-  // ── Sub-agent — see @harness/subagent ──
+  // ── Sub-agent — see @taor/subagent ──
   // ═══════════════════════════════════════════════════════════════
 
   /**
    * Inject a subagent coordinator.
    *
-   * Called by `createHarness()` in @harness/engine after constructing
+   * Called by `createHarness()` in @taor/engine after constructing
    * the SubagentCoordinator with the parent's adapter + tool registry.
    */
   setSubagent(coordinator: ISubagentCoordinator): this {
@@ -1749,7 +1749,7 @@ export class Harness
   /**
    * Inject a hook registry.
    *
-   * Called by `createHarness()` in @harness/engine after constructing
+   * Called by `createHarness()` in @taor/engine after constructing
    * the HookRegistry from HarnessConfig.hooks.
    */
   setHooks(registry: IHookRegistry): this {
@@ -1769,7 +1769,7 @@ export class Harness
   /**
    * Inject a permission engine.
    *
-   * Called by `createHarness()` in @harness/engine after constructing
+   * Called by `createHarness()` in @taor/engine after constructing
    * the PermissionEngine with the resolved config + tool descriptors.
    * Must be called before the TAOR loop starts — permission checks
    * during ACT phase depend on this engine being available.
@@ -1791,7 +1791,7 @@ export class Harness
   /**
    * Inject a memory facade.
    *
-   * Called by `createHarness()` in @harness/engine after constructing
+   * Called by `createHarness()` in @taor/engine after constructing
    * the MemoryFacade from HarnessConfig.memory.
    */
   setMemory(facade: IMemoryFacade): this {

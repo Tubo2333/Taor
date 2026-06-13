@@ -1,15 +1,15 @@
-# TG0 Step 12 — @harness/compressor 交付总结
+# TG0 Step 12 — @taor/compressor 交付总结
 
 > **完成时间**：2026-06-12
 > **审查状态**：⏳ 待交叉审查
-> **上一步**：Step 11 @harness/memory（含 9 条审查修复）
-> **下一步**：Step E @harness/engine（冒烟测试）— TG0 最后一步
+> **上一步**：Step 11 @taor/memory（含 9 条审查修复）
+> **下一步**：Step E @taor/engine（冒烟测试）— TG0 最后一步
 
 ---
 
 ## 一、做了什么
 
-实现了 `@harness/compressor` 包 — 5 层"先便宜后贵"压缩管道。trim + truncate 完整实现，summarize/chunk/embed TG0 stub。集成到 `harness.compressor` 访问器。
+实现了 `@taor/compressor` 包 — 5 层"先便宜后贵"压缩管道。trim + truncate 完整实现，summarize/chunk/embed TG0 stub。集成到 `harness.compressor` 访问器。
 
 ### 文件清单
 
@@ -68,14 +68,14 @@ currentTokens > triggerThreshold (100k) → 启动压缩
 ### 2.5 依赖反转
 
 ```
-@harness/core (harness.ts)
+@taor/core (harness.ts)
   └── ICompressorPipeline  ← 结构接口（compress() → CompressedContext）
 
-@harness/compressor
+@taor/compressor
   ├── CompressorPipeline   ← 真实实现
   └── strategies/          ← 5 层策略
 
-@harness/engine (index.ts)
+@taor/engine (index.ts)
   └── createHarness()      ← 组装 + 注入
 ```
 
@@ -125,5 +125,5 @@ currentTokens > triggerThreshold (100k) → 启动压缩
 
 ```
 1-12 ✅ ALL (100%)
-E    ⬜ @harness/engine (冒烟测试)
+E    ⬜ @taor/engine (冒烟测试)
 ```

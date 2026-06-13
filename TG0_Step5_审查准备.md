@@ -1,4 +1,4 @@
-# Harness Engine — TG0 进度总结 & 审查准备
+# Taor — TG0 进度总结 & 审查准备
 
 > **用途**：粘贴到新 Claude Code 窗口，以独立专家的视角对已完成工作进行 adversarial review。
 > **进度**：TG0 12 步中已完成前 5 步（42%）。
@@ -8,7 +8,7 @@
 
 ## 项目是什么
 
-开源的 **Harness Engineering 框架**（TypeScript agent 框架），基于 Claude Code 泄露源码设计。
+开源的 **Taorering 框架**（TypeScript agent 框架），基于 Claude Code 泄露源码设计。
 
 - **语言**：TypeScript
 - **模式**：轻量内核 + 可组合引擎（9 个独立 npm 包，workspace 协议）
@@ -21,16 +21,16 @@
 ```
 TG0 实现顺序（按依赖拓扑）：
 1-3 ✅ types → context → events                          [类型层，纯类型无逻辑]
-4   ✅ @harness/tools (defineTool + ToolRegistry)         [工具系统 + 11条审查修复]
-5   ✅ @harness/adapters (AnthropicAdapter 实现)          [LLM 适配器层 — 420行]
-6   ⬜ @harness/core/config.ts (validateConfig)           [← 下一步]
-7   ⬜ @harness/core/harness.ts (TAOR 循环 + 事件队列)    [核心引擎]
-8   ⬜ @harness/permission (PermissionEngine)
-9   ⬜ @harness/hooks (HookRegistry)
-10  ⬜ @harness/subagent (Coordinator + Worker)
-11  ⬜ @harness/memory (SQLite/JSON/InMemory stores)
-12  ⬜ @harness/compressor (5-layer pipeline)
-E   ⬜ @harness/engine (冒烟测试)
+4   ✅ @taor/tools (defineTool + ToolRegistry)         [工具系统 + 11条审查修复]
+5   ✅ @taor/adapters (AnthropicAdapter 实现)          [LLM 适配器层 — 420行]
+6   ⬜ @taor/core/config.ts (validateConfig)           [← 下一步]
+7   ⬜ @taor/core/harness.ts (TAOR 循环 + 事件队列)    [核心引擎]
+8   ⬜ @taor/permission (PermissionEngine)
+9   ⬜ @taor/hooks (HookRegistry)
+10  ⬜ @taor/subagent (Coordinator + Worker)
+11  ⬜ @taor/memory (SQLite/JSON/InMemory stores)
+12  ⬜ @taor/compressor (5-layer pipeline)
+E   ⬜ @taor/engine (冒烟测试)
 ```
 
 ---
@@ -47,7 +47,7 @@ E   ⬜ @harness/engine (冒烟测试)
 
 ---
 
-## Step 4: @harness/tools（已完成 + 11 条审查修复）
+## Step 4: @taor/tools（已完成 + 11 条审查修复）
 
 ### 核心实现
 
@@ -85,7 +85,7 @@ E   ⬜ @harness/engine (冒烟测试)
 
 ---
 
-## Step 5: @harness/adapters（刚完成）
+## Step 5: @taor/adapters（刚完成）
 
 ### 实现范围
 
@@ -132,7 +132,7 @@ E   ⬜ @harness/engine (冒烟测试)
 
 ---
 
-## 下一步：TG0 Step 6 — `@harness/core/config.ts`
+## 下一步：TG0 Step 6 — `@taor/core/config.ts`
 
 需要实现 `validateConfig()` 函数，对 `HarnessConfig` 做运行时校验：
 - 必填字段检查（`model`、`tools`）
@@ -191,9 +191,9 @@ E   ⬜ @harness/engine (冒烟测试)
 - streaming JSON 累积（`acc.json += delta.partial_json`）——是否处理了不完整/非法 JSON？
 
 **维度 3：跨模块集成**
-- `@harness/core` 的 `Message` vs `@harness/adapters` 的 `Anthropic.MessageParam` —— 转换是否完全覆盖所有 MessageContent 变体？
+- `@taor/core` 的 `Message` vs `@taor/adapters` 的 `Anthropic.MessageParam` —— 转换是否完全覆盖所有 MessageContent 变体？
 - `ToolDescriptor.parameters`（JSONSchema Draft-07 超集）→ `Anthropic.Tool.InputSchema`（`[k: string]: unknown`）——运行时是否会因为多余的 `$ref`/`anyOf` 字段导致 Anthropic API 拒绝？
-- `Config.unresolved.ts` 中的 stub 类型（`ToolInput = unknown`）与实际 `@harness/tools` 的 `ToolInput = ToolDescriptor | ToolConstructor` —— 类型鸿沟何时消除？
+- `Config.unresolved.ts` 中的 stub 类型（`ToolInput = unknown`）与实际 `@taor/tools` 的 `ToolInput = ToolDescriptor | ToolConstructor` —— 类型鸿沟何时消除？
 - `AdapterRequest = unknown` 这个 design pattern 是否正确？有没有漏掉的序列化需求？
 
 **维度 4：设计一致性**

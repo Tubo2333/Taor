@@ -1,4 +1,4 @@
-# Harness Engine — Developer API Design v2
+# Taor — Developer API Design v2
 
 > **状态**：审理修正后定稿。3 致命 + 3 重要问题已修正。
 > **前一版**：`d:/C-file/Harness_Engineer_Resume_Prompt.md`
@@ -74,7 +74,7 @@
 │  │  LLMAdapter        Observation                      │   │
 │  └──────────────────────────────────────────────────────┘   │
 │                                                              │
-│  子系统层（6 个独立 @harness/* 包）：                        │
+│  子系统层（6 个独立 @taor/* 包）：                        │
 │  ┌────────┬──────────┬──────────┬─────────┬─────────┬────┐ │
 │  │ Memory │Compressor│Permission│Sub-agent│  Tool   │Hooks│ │
 │  │ (3层)  │ (5层)    │ (4层)    │(Coord/  │Registry │     │ │
@@ -1563,8 +1563,8 @@ interface CompressStrategy {
 ## 十三、模块树与包结构
 
 ```
-@harness/
-├── core/                       # @harness/core
+@taor/
+├── core/                       # @taor/core
 │   ├── harness.ts              #   Harness 类（主入口）
 │   ├── config.ts               #   HarnessConfig 类型 + 校验 + 默认值
 │   ├── context.ts              #   HarnessContext（3 层作用域）+ Session/Turn/Shared
@@ -1574,14 +1574,14 @@ interface CompressStrategy {
 │   ├── types.ts                #   共享基础类型（TokenUsage, Artifact, Unsubscribe 等）
 │   └── index.ts                #   re-export 所有 public API
 │
-├── adapters/                   # @harness/adapters
+├── adapters/                   # @taor/adapters
 │   ├── types.ts                #   LLMAdapter 接口 + ThinkEvent + AdapterFeature
 │   ├── anthropic.ts            #   AnthropicAdapter
 │   ├── openai.ts               #   OpenaiAdapter
 │   ├── deepseek.ts             #   DeepSeekAdapter
 │   └── index.ts
 │
-├── tools/                      # @harness/tools
+├── tools/                      # @taor/tools
 │   ├── descriptor.ts           #   ToolDescriptor + defineTool() + tool()
 │   ├── base.ts                 #   Tool 抽象类
 │   ├── context.ts              #   ToolContext + ToolResult + ToolErrorCode
@@ -1596,31 +1596,31 @@ interface CompressStrategy {
 │   │   └── index.ts
 │   └── index.ts
 │
-├── permission/                 # @harness/permission
+├── permission/                 # @taor/permission
 │   ├── engine.ts               #   PermissionEngine
 │   ├── types.ts                #   PermissionConfig, PermissionRule, PermissionVerdict
 │   ├── resource.ts             #   @resource 注解解析 + 约束匹配
 │   └── index.ts
 │
-├── hooks/                      # @harness/hooks
+├── hooks/                      # @taor/hooks
 │   ├── registry.ts             #   HookRegistry（链式注册 + 优先级 + 短路）
 │   ├── types.ts                #   HookHandlerMap, HookName, HookRegistration
 │   └── index.ts
 │
-├── subagent/                   # @harness/subagent
+├── subagent/                   # @taor/subagent
 │   ├── coordinator.ts          #   SubagentCoordinator（spawn 实现）
 │   ├── worker.ts               #   SubagentWorker（独立 TAOR 循环）
 │   ├── handle.ts               #   SubagentHandle（生命周期状态机）
 │   ├── types.ts                #   SubagentSpec, SubagentResult, SubagentStatus
 │   └── index.ts
 │
-├── memory/                     # @harness/memory
+├── memory/                     # @taor/memory
 │   ├── facade.ts               #   MemoryFacade
 │   ├── store.ts                #   MemoryStore 接口 + 3 种后端实现
 │   ├── types.ts                #   MemoryConfig, MemoryEntry
 │   └── index.ts
 │
-├── compressor/                 # @harness/compressor
+├── compressor/                 # @taor/compressor
 │   ├── pipeline.ts             #   5 层 cheap-first pipeline
 │   ├── strategies/             #   各策略实现
 │   │   ├── trim.ts
@@ -1631,7 +1631,7 @@ interface CompressStrategy {
 │   ├── types.ts                #   CompressorConfig, CompressStrategy
 │   └── index.ts
 │
-└── harness-engine/             # @harness/engine（聚合包）
+└── taor/             # @taor/engine（聚合包）
     ├── index.ts                #   createHarness() + re-export 所有子系统
     └── package.json            #   dependencies: 上述所有包
 ```
@@ -1643,7 +1643,7 @@ interface CompressStrategy {
 ### 场景 A：最小 CLI Agent（12 行）
 
 ```typescript
-import { createHarness, defineTool } from "@harness/engine"
+import { createHarness, defineTool } from "@taor/engine"
 import * as z from "zod"
 
 const readFile = defineTool({

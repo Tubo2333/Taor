@@ -1,7 +1,7 @@
 {
-  "name": "@harness/compressor",
+  "name": "@taor/compressor",
   "version": "0.1.0",
-  "description": "Harness Engine context compressor — 5-layer cheap-first pipeline (trim/summarize/chunk/embed/truncate)",
+  "description": "Taor context compressor — 5-layer cheap-first pipeline (trim/summarize/chunk/embed/truncate)",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -15,8 +15,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@harness/core": "^0.1.0",
-    "@harness/adapters": "^0.1.0"
+    "@taor/core": "^0.1.0",
+    "@taor/adapters": "^0.1.0"
   },
   "devDependencies": {
     "typescript": "^5.7.0"
@@ -24,7 +24,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tubo2333/harness-engine"
+    "url": "https://github.com/Tubo2333/taor"
   },
   "keywords": [
     "ai",

@@ -8,9 +8,9 @@
 - **CI typecheck fix** — `tsconfig.typecheck.json` (non-composite flat typecheck) replaces `tsc --build --noEmit`. CI matrix expanded to Node 20/22/24.
 - **Integration test suite** — 45 tests (16 smoke + 1 process-worker + 28 TAOR lifecycle). Enhanced MockAdapter in shared fixtures.
 - **npm publish readiness** — All 10 packages have `repository`, `keywords`, `license`, `publishConfig`. `prepublish.sh` + `publish.yml` workflow.
-- **OpenTelemetry tracing** — `@harness/telemetry` with `createOtelHooks()`. Zero TAOR changes. 5 span types (Session/THINK/tool/compress/error). OTLP + console exporters. Optional dependency (AD-3).
+- **OpenTelemetry tracing** — `@taor/telemetry` with `createOtelHooks()`. Zero TAOR changes. 5 span types (Session/THINK/tool/compress/error). OTLP + console exporters. Optional dependency (AD-3).
 - **Circuit breaker** — `CircuitBreakerAdapter` decorator. 3-state (CLOSED→OPEN→HALF_OPEN). Sliding window failure counting. Auto-wrap via `createHarness({ circuitBreaker: {...} })`. 14 unit tests.
-- **MCP consumer support** — `@harness/mcp` with `MCPToolBridge`. Stdio/SSE transport, `tools/list` + `tools/call`. Two-step async init. Process cleanup (H3 fix). 12 integration tests.
+- **MCP consumer support** — `@taor/mcp` with `MCPToolBridge`. Stdio/SSE transport, `tools/list` + `tools/call`. Two-step async init. Process cleanup (H3 fix). 12 integration tests.
 - **Code reviewer example** — `examples/code-reviewer/`. 3 tools (read_file/grep/write_file) with HITL approval. Token budget hook ($5 limit). README with 3-step verification.
 - **API documentation** — 14 docs: openai-adapter, deepseek-adapter, circuit-breaker, telemetry, mcp, adapters, harness, tools, hooks, memory, compressor, permission, subagent, quickstart.
 

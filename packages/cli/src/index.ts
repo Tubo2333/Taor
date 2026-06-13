@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-// @harness/cli — Harness Engine command-line interface
+// @taor/cli — Taor command-line interface
 
-import { createHarness } from "@harness/engine"
+import { createHarness } from "@taor/engine"
 
 const command = process.argv[2] ?? "help"
 
@@ -55,7 +55,7 @@ async function main() {
 
       case "tool": {
         const name = process.argv[3] ?? "MyTool"
-        const template = `import { defineTool } from "@harness/tools"
+        const template = `import { defineTool } from "@taor/tools"
 
 export const ${name} = defineTool({
   name: "${name}",
@@ -75,7 +75,7 @@ export const ${name} = defineTool({
       }
 
       default:
-        console.log(`Harness Engine CLI v0.1
+        console.log(`Taor CLI v0.1
 
 Usage:
   harness run <prompt>     Run an agent session

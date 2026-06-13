@@ -1,4 +1,4 @@
-# Harness Engine — TG0 Step 9 @harness/hooks Adversarial Review
+# Taor — TG0 Step 9 @taor/hooks Adversarial Review
 
 > **审查人视角**：独立架构审计师。审查 HookRegistry 实现、TAOR 7 个集成点、API 规范符合度。
 > **审查日期**：2026-06-12
@@ -140,12 +140,12 @@ interface IHookRegistry {
 
 对比 Step 8 的 `IPermissionEngine` 保留了 `IPermissionVerdict` 结构化类型。Step 9 的 `IHookRegistry` 完全擦除为 `hook: string` + `args: unknown[]` → `Promise<unknown[]>`。调用方传错参数（如 `execute("beforeThink", 42)`）编译器不报错。
 
-这是有意的 tradeoff——13 个 hook 点各有不同签名，structural interface 无法表达 `HookName → 参数类型` 映射而不引入 `@harness/hooks` 的类型依赖。但应与 Step 8 contract matrix 模式一致地文档化。交付总结 R3 已标记。
+这是有意的 tradeoff——13 个 hook 点各有不同签名，structural interface 无法表达 `HookName → 参数类型` 映射而不引入 `@taor/hooks` 的类型依赖。但应与 Step 8 contract matrix 模式一致地文档化。交付总结 R3 已标记。
 
 **修正**：在 `IHookRegistry` 上方加 hook 参数矩阵注释：
 ```typescript
 /**
- * Hook point parameter matrix (keep in sync with @harness/hooks HookHandlerMap):
+ * Hook point parameter matrix (keep in sync with @taor/hooks HookHandlerMap):
  *
  * | Hook              | Args                                   | Return       |
  * |-------------------|----------------------------------------|--------------|
@@ -164,7 +164,7 @@ interface IHookRegistry {
  */
 ```
 
-✅ **已修复**：`harness.ts:135-170` — IHookRegistry JSDoc 新增 13 行参数矩阵表（Hook / Args / Return），标注与 `@harness/hooks HookHandlerMap` 保持同步。
+✅ **已修复**：`harness.ts:135-170` — IHookRegistry JSDoc 新增 13 行参数矩阵表（Hook / Args / Return），标注与 `@taor/hooks HookHandlerMap` 保持同步。
 
 ---
 
@@ -305,12 +305,12 @@ const cancelled = results.some((r) => r === null)
 
 | 排位 | Step | 模块 | 评分 | 短评 |
 |------|------|------|------|------|
-| 1 | 8 | @harness/permission | **A** | 匹配算法与 API §8.4 完全对应，依赖反转干净 |
+| 1 | 8 | @taor/permission | **A** | 匹配算法与 API §8.4 完全对应，依赖反转干净 |
 | 2 | 7 | TAOR 核心引擎 | **A-** | AsyncGenerator 协议正确，并发路径稳固 |
-| **3** | **9** | **@harness/hooks** | **B+** | execute() 泛型签名优雅，错误隔离正确，优先级排序正确。afterThink 返回值丢弃 (I-1) + onError 恢复未实现 (I-2) 拖分。修完可升 A- |
-| 4 | 5 | @harness/adapters | **A-** | 650 行完整 Anthropic 实现 |
+| **3** | **9** | **@taor/hooks** | **B+** | execute() 泛型签名优雅，错误隔离正确，优先级排序正确。afterThink 返回值丢弃 (I-1) + onError 恢复未实现 (I-2) 拖分。修完可升 A- |
+| 4 | 5 | @taor/adapters | **A-** | 650 行完整 Anthropic 实现 |
 | 5 | 6 | config.ts | **B+** | NaN 全覆盖，子配置默认不一致 |
-| 6 | 4 | @harness/tools | **B+** | 三路径定义，11 条审查后稳固 |
+| 6 | 4 | @taor/tools | **B+** | 三路径定义，11 条审查后稳固 |
 
 ---
 

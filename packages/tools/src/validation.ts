@@ -1,4 +1,4 @@
-// @harness/tools — shared tool name validation
+// @taor/tools — shared tool name validation
 //
 // Extracted from descriptor.ts and registry.ts (both used inline copies).
 // Single source of truth for the tool name regex and validation logic.

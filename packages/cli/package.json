@@ -1,7 +1,7 @@
 {
-  "name": "@harness/cli",
+  "name": "@taor/cli",
   "version": "0.1.0",
-  "description": "Harness Engine CLI — run agents, generate configs, scaffold tools",
+  "description": "Taor CLI — run agents, generate configs, scaffold tools",
   "main": "./dist/index.js",
   "bin": {
     "harness": "./dist/index.js"
@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@harness/engine": "^0.1.0"
+    "@taor/engine": "^0.1.0"
   },
   "devDependencies": {
     "typescript": "^5.7.0",
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tubo2333/harness-engine"
+    "url": "https://github.com/Tubo2333/taor"
   },
   "keywords": [
     "ai",

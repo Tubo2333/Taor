@@ -1,4 +1,4 @@
-// @harness/core — unified env validation
+// @taor/core — unified env validation
 
 /**
  * Validate required environment variables.

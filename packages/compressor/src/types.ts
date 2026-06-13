@@ -1,7 +1,7 @@
-// @harness/compressor — type definitions
+// @taor/compressor — type definitions
 
-import type { CompressLevel, TurnContext } from "@harness/core"
-import type { AdapterConstructor } from "@harness/adapters"
+import type { CompressLevel, TurnContext } from "@taor/core"
+import type { AdapterConstructor } from "@taor/adapters"
 
 export interface CompressorConfig {
   /** Compression strategies in priority order (cheap → expensive) */
@@ -36,7 +36,7 @@ export interface CompressStrategy {
 }
 
 export interface CompressedContext {
-  messages: import("@harness/core").Message[]
+  messages: import("@taor/core").Message[]
   tokenCount: number
   level: CompressLevel
   strategy: string

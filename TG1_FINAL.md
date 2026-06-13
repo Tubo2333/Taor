@@ -1,4 +1,4 @@
-# Harness Engine — TG1 最终交付文档
+# Taor — TG1 最终交付文档
 
 > **完成日期**：2026-06-12
 > **状态**：✅ TG1 P0+P1 交付完成
@@ -37,15 +37,15 @@
 ## 二、TG0+TG1 完整包结构
 
 ```
-@harness/engine          — createHarness 工厂
-├── @harness/core        — TAOR 循环 + 7 结构接口
-├── @harness/tools       — defineTool/tool()/Tool → ToolRegistry
-├── @harness/adapters    — AnthropicAdapter (完整)
-├── @harness/permission  — 4 级 PermissionEngine
-├── @harness/hooks       — 13 钩子点 HookRegistry
-├── @harness/subagent    — inline/process 隔离 + Heartbeat
-├── @harness/memory      — 3 层 MemoryFacade + 3 后端
-└── @harness/compressor  — 5 层 CompressorPipeline (summarize 实现)
+@taor/engine          — createHarness 工厂
+├── @taor/core        — TAOR 循环 + 7 结构接口
+├── @taor/tools       — defineTool/tool()/Tool → ToolRegistry
+├── @taor/adapters    — AnthropicAdapter (完整)
+├── @taor/permission  — 4 级 PermissionEngine
+├── @taor/hooks       — 13 钩子点 HookRegistry
+├── @taor/subagent    — inline/process 隔离 + Heartbeat
+├── @taor/memory      — 3 层 MemoryFacade + 3 后端
+└── @taor/compressor  — 5 层 CompressorPipeline (summarize 实现)
 ```
 
 ---

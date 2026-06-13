@@ -4,7 +4,7 @@
  */
 
 import { describe, it, expect } from "vitest"
-import { OpenaiAdapter, DeepSeekAdapter } from "@harness/engine"
+import { OpenaiAdapter, DeepSeekAdapter } from "@taor/engine"
 
 function makeAdapter() {
   return new OpenaiAdapter({ apiKey: "test-key" })

@@ -11,9 +11,9 @@
 
 ### ① AD-1: core 无 sibling import → ✅ PASS
 
-`grep -rn 'from "@harness/(adapters|tools|permission|hooks|subagent|memory|compressor|engine|telemetry)"' packages/core/src/` 返回 **0 matches**。
+`grep -rn 'from "@taor/(adapters|tools|permission|hooks|subagent|memory|compressor|engine|telemetry)"' packages/core/src/` 返回 **0 matches**。
 
-`@harness/core` 只用 `import type` 从子包导入类型（编译时擦除），运行时子系统通过构造函数注入。依赖倒置严格执行，零违反。
+`@taor/core` 只用 `import type` 从子包导入类型（编译时擦除），运行时子系统通过构造函数注入。依赖倒置严格执行，零违反。
 
 ---
 
@@ -32,7 +32,7 @@
 ### ③ AD-3: optional dep 安全 → ✅ PASS（LOW — ESM bundle 风险）
 
 - **`openai` 包**：零静态 import。`OpenAICompatibleAdapter.createClient()` 使用 `createRequire(import.meta.url)` 动态加载（`openai-compatible-base.ts:300-311`）。若包未安装，`think()` 的 try-catch 会捕获 MODULE_NOT_FOUND 并 yield error event，不会崩溃。
-- **`@opentelemetry/api`**：`otel-hooks.ts:9` 有静态 import `{ trace, context }`。但 `@harness/engine` **不导入** `@harness/telemetry`（grep 确认 0 matches），完全隔离——只有用户显式 `import { createOtelHooks } from "@harness/telemetry"` 时才会加载。如彼时 `@opentelemetry/api` 未安装，Node.js 抛出 `ERR_MODULE_NOT_FOUND`——这是合理的"你用可选功能就得装依赖"行为。
+- **`@opentelemetry/api`**：`otel-hooks.ts:9` 有静态 import `{ trace, context }`。但 `@taor/engine` **不导入** `@taor/telemetry`（grep 确认 0 matches），完全隔离——只有用户显式 `import { createOtelHooks } from "@taor/telemetry"` 时才会加载。如彼时 `@opentelemetry/api` 未安装，Node.js 抛出 `ERR_MODULE_NOT_FOUND`——这是合理的"你用可选功能就得装依赖"行为。
 - **潜在风险**: ESM bundle 场景下 `createRequire(import.meta.url)` 可能失效——见 EXTRA-3。
 
 ---

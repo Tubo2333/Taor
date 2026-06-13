@@ -1,18 +1,18 @@
 /**
- * Harness Engine — TG0 Integration Smoke Test
+ * Taor — TG0 Integration Smoke Test
  *
  * Validates createHarness() full lifecycle: construction → subsystem injection →
  * basic TAOR loop execution. Uses a mock adapter (no real LLM calls).
  */
 
 import { describe, it, expect } from "vitest"
-import { createHarness } from "@harness/engine"
+import { createHarness } from "@taor/engine"
 import type {
   HarnessConfig,
   HarnessEvent,
   UserDecision,
   SessionResult,
-} from "@harness/engine"
+} from "@taor/engine"
 import { MockAdapter } from "./fixtures/mock-adapter.js"
 
 // ═══════════════════════════════════════════════════════════════════
@@ -294,7 +294,7 @@ describe("TG1 Features", () => {
 
   // ── onConflict: skip ──
   it("ToolRegistry.register with onConflict: skip", () => {
-    const { ToolRegistry, defineTool } = require("@harness/tools") as typeof import("@harness/tools")
+    const { ToolRegistry, defineTool } = require("@taor/tools") as typeof import("@taor/tools")
     const reg = new ToolRegistry()
     const t1 = defineTool({ name: "TestTool", description: "", parameters: { type: "object", properties: {} } })
     reg.register([t1])
@@ -305,7 +305,7 @@ describe("TG1 Features", () => {
 
   // ── onConflict: override ──
   it("ToolRegistry.register with onConflict: override", () => {
-    const { ToolRegistry, defineTool } = require("@harness/tools") as typeof import("@harness/tools")
+    const { ToolRegistry, defineTool } = require("@taor/tools") as typeof import("@taor/tools")
     const reg = new ToolRegistry()
     const t1 = defineTool({ name: "TestTool", description: "v1", parameters: { type: "object", properties: {} } })
     const t2 = defineTool({ name: "TestTool", description: "v2", parameters: { type: "object", properties: {} } })
@@ -329,7 +329,7 @@ describe("TG1 Features", () => {
 
   // ── Memory backends ──
   it("InMemoryStore get/set/has/list/delete", async () => {
-    const { InMemoryStore } = require("@harness/memory") as typeof import("@harness/memory")
+    const { InMemoryStore } = require("@taor/memory") as typeof import("@taor/memory")
     const store = new InMemoryStore("session")
     await store.set("k1", "v1")
     expect(await store.get("k1")).toBe("v1")
@@ -342,7 +342,7 @@ describe("TG1 Features", () => {
 
   // ── Compressor chunk strategy ──
   it("chunk strategy should reduce messages", async () => {
-    const { chunk } = require("@harness/compressor") as typeof import("@harness/compressor")
+    const { chunk } = require("@taor/compressor") as typeof import("@taor/compressor")
     const messages = Array.from({ length: 10 }, (_, i) => ({
       role: "user" as const,
       content: [{ type: "text" as const, text: `Message ${i}: lorem ipsum dolor sit amet consectetur adipiscing elit` }],

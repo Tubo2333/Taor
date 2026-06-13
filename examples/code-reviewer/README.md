@@ -1,6 +1,6 @@
-# Code Reviewer Agent — Harness Engine Example
+# Code Reviewer Agent — Taor Example
 
-A real-world example agent that demonstrates the Harness Engine framework's core capabilities:
+A real-world example agent that demonstrates the Taor framework's core capabilities:
 **tools**, **multi-turn conversations**, **HITL (Human-In-The-Loop) approval**, and **hooks**.
 
 ## What It Does
@@ -29,7 +29,7 @@ export OPENAI_API_KEY=sk-...
 ### Step 2: Run the Agent
 
 ```bash
-# Review the Harness Engine core:
+# Review the Taor core:
 npx tsx examples/code-reviewer/agent.ts --dir ./packages/core/src
 
 # With a custom review prompt:
@@ -50,7 +50,7 @@ The agent runs for at most **3 turns**. You should see:
 Expected console output:
 ```
 ╔══════════════════════════════════════════════════════════╗
-║  Code Reviewer Agent — Harness Engine v0.2.0            ║
+║  Code Reviewer Agent — Taor v0.2.0            ║
 ╠══════════════════════════════════════════════════════════╣
 ║  Model:     claude-sonnet-4-6                            ║
 ║  Directory: ./packages/core/src                          ║
@@ -95,7 +95,7 @@ examples/code-reviewer/
 
 | Concept | How It's Shown |
 |---------|---------------|
-| **Tool system** | `read_file`, `grep`, `write_file` — defined with `tool()` from `@harness/tools` |
+| **Tool system** | `read_file`, `grep`, `write_file` — defined with `tool()` from `@taor/tools` |
 | **Multi-turn** | Agent reads → searches → proposes across multiple TAOR loop iterations |
 | **HITL approval** | `write_file` has `requiresApproval: true` — harness pauses and asks for human confirmation |
 | **Hooks** | `createBudgetHook()` monitors token usage on `onTurnEnd` and aborts if >$5 |

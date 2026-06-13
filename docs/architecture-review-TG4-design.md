@@ -132,8 +132,8 @@ for await (const chunk of stream) {
 **替代方案（推荐）**: 用 existing Hook 系统实现 OTEL，零 TAOR loop 改动:
 
 ```typescript
-// @harness/telemetry/src/otel-hooks.ts
-import type { HookInput } from "@harness/hooks"
+// @taor/telemetry/src/otel-hooks.ts
+import type { HookInput } from "@taor/hooks"
 import type { Tracer } from "@opentelemetry/api"
 
 export function createOtelHooks(tracer: Tracer): HookInput[] {

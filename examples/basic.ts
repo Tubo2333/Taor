@@ -1,8 +1,8 @@
 /**
- * Minimal Harness Engine example — no real LLM needed.
+ * Minimal Taor example — no real LLM needed.
  * Run: npx tsx examples/basic.ts
  */
-import { createHarness } from "@harness/engine"
+import { createHarness } from "@taor/engine"
 
 // Inline mock adapter — just echoes back
 class EchoAdapter {

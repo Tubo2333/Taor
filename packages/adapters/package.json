@@ -1,7 +1,7 @@
 {
-  "name": "@harness/adapters",
+  "name": "@taor/adapters",
   "version": "0.1.0",
-  "description": "Harness Engine adapters — LLMAdapter interface + Anthropic/OpenAI/DeepSeek implementations",
+  "description": "Taor adapters — LLMAdapter interface + Anthropic/OpenAI/DeepSeek implementations",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -16,8 +16,8 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.104.1",
-    "@harness/core": "^0.1.0",
-    "@harness/tools": "^0.1.0"
+    "@taor/core": "^0.1.0",
+    "@taor/tools": "^0.1.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tubo2333/harness-engine"
+    "url": "https://github.com/Tubo2333/taor"
   },
   "keywords": [
     "ai",

@@ -1,14 +1,14 @@
-// @harness/subagent — SubagentCoordinator (spawn + lifecycle)
+// @taor/subagent — SubagentCoordinator (spawn + lifecycle)
 
-import type { Logger } from "@harness/core"
-import type { ToolDescriptor, ToolInput } from "@harness/tools"
+import type { Logger } from "@taor/core"
+import type { ToolDescriptor, ToolInput } from "@taor/tools"
 import type { SubagentSpec, SubagentHandle } from "./types.js"
 import { SubagentHandleImpl } from "./handle.js"
 import { SubagentWorker } from "./worker.js"
 import { ProcessWorker } from "./process-worker.js"
 
 // ═══════════════════════════════════════════════════════════════════
-// ─── Structural interfaces — avoids importing @harness/adapters ───
+// ─── Structural interfaces — avoids importing @taor/adapters ───
 // ═══════════════════════════════════════════════════════════════════
 
 interface CoordinatorAdapter {

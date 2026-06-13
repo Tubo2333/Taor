@@ -1,16 +1,16 @@
 # MCP Consumer API Reference
 
-> `@harness/mcp` — Model Context Protocol consumer. Discover and call tools from external MCP servers (stdio/SSE). MCP is a **tool source**, not a new subsystem.
+> `@taor/mcp` — Model Context Protocol consumer. Discover and call tools from external MCP servers (stdio/SSE). MCP is a **tool source**, not a new subsystem.
 
 ## Quick Start
 
 ```bash
-npm install @harness/mcp
+npm install @taor/mcp
 ```
 
 ```typescript
-import { createHarness } from "@harness/engine"
-import { MCPToolBridge } from "@harness/mcp"
+import { createHarness } from "@taor/engine"
+import { MCPToolBridge } from "@taor/mcp"
 
 // Step 1: Create harness (sync)
 const harness = createHarness({
@@ -56,7 +56,7 @@ The main class. Connects to an MCP server, discovers tools, and converts them fo
 ### Constructor
 
 ```typescript
-import { MCPToolBridge } from "@harness/mcp"
+import { MCPToolBridge } from "@taor/mcp"
 
 new MCPToolBridge(config: MCPServerConfig)
 ```
@@ -193,13 +193,13 @@ try {
 
 ## Optional Dependency (AD-3)
 
-`@harness/mcp` has `@modelcontextprotocol/sdk` as a regular dependency. If you install `@harness/mcp`, the SDK comes with it. `MCPToolBridge` uses dynamic `import()` to load the SDK lazily on first `connect()` call — if the SDK is not available, it throws a clear error with installation instructions.
+`@taor/mcp` has `@modelcontextprotocol/sdk` as a regular dependency. If you install `@taor/mcp`, the SDK comes with it. `MCPToolBridge` uses dynamic `import()` to load the SDK lazily on first `connect()` call — if the SDK is not available, it throws a clear error with installation instructions.
 
 ## Type Exports
 
 ```typescript
-import { MCPToolBridge } from "@harness/mcp"
-import type { MCPServerConfig, MCPConnectResult } from "@harness/mcp"
+import { MCPToolBridge } from "@taor/mcp"
+import type { MCPServerConfig, MCPConnectResult } from "@taor/mcp"
 ```
 
 See [tools.md](./tools.md) for the `ToolDescriptor` and `ToolRegistry` API.

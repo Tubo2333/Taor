@@ -1,6 +1,6 @@
-// @harness/permission — type definitions
+// @taor/permission — type definitions
 
-import type { RiskLevel } from "@harness/tools"
+import type { RiskLevel } from "@taor/tools"
 
 export type PermissionLevel = "deny" | "boundary" | "allow" | "ask"
 

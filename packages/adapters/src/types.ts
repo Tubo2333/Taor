@@ -1,7 +1,7 @@
-// @harness/adapters — LLMAdapter interface + shared types
+// @taor/adapters — LLMAdapter interface + shared types
 
-import type { TurnContext, HarnessError, TokenUsage, Message } from "@harness/core"
-import type { ToolDescriptor, ToolResult } from "@harness/tools"
+import type { TurnContext, HarnessError, TokenUsage, Message } from "@taor/core"
+import type { ToolDescriptor, ToolResult } from "@taor/tools"
 
 export type AdapterFeature =
   | "streaming"
@@ -94,7 +94,7 @@ export interface LLMAdapter {
    */
   wrapToolResult(callId: string, result: ToolResult, toolName?: string): Message
 
-  countTokens(messages: import("@harness/core").Message[]): number
+  countTokens(messages: import("@taor/core").Message[]): number
   countRequestTokens(request: AdapterRequest): number
 
   normalizeError(error: unknown): HarnessError

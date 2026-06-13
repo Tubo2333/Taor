@@ -3,7 +3,7 @@
  * Prerequisites: export ANTHROPIC_API_KEY=sk-ant-...
  * Run: npx tsx examples/real.ts
  */
-import { createHarness } from "@harness/engine"
+import { createHarness } from "@taor/engine"
 
 async function main() {
   const harness = createHarness({

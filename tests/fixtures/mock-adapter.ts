@@ -5,8 +5,8 @@
  * token usage reporting, and stop reason control.
  */
 
-import type { TurnContext, HarnessError } from "@harness/core"
-import type { ToolDescriptor } from "@harness/tools"
+import type { TurnContext, HarnessError } from "@taor/core"
+import type { ToolDescriptor } from "@taor/tools"
 
 // ─── Configuration types ───
 

@@ -1,7 +1,7 @@
 {
-  "name": "@harness/core",
+  "name": "@taor/core",
   "version": "0.1.0",
-  "description": "Harness Engine core — types, context, events, config, harness, TAOR loop",
+  "description": "Taor core — types, context, events, config, harness, TAOR loop",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -21,7 +21,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tubo2333/harness-engine"
+    "url": "https://github.com/Tubo2333/taor"
   },
   "keywords": [
     "ai",

@@ -1,8 +1,8 @@
 {
-  "name": "harness-engine-monorepo",
+  "name": "taor-monorepo",
   "version": "0.0.0",
   "private": true,
-  "description": "Harness Engine — open-source TypeScript agent framework monorepo",
+  "description": "Taor — open-source TypeScript agent framework monorepo",
   "workspaces": [
     "packages/*"
   ],
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tubo2333/harness-engine"
+    "url": "https://github.com/Tubo2333/taor"
   },
   "author": "Tubo2333",
   "license": "MIT"

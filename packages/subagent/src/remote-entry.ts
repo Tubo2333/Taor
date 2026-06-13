@@ -1,10 +1,10 @@
-// @harness/subagent — Remote process entry point (child process)
+// @taor/subagent — Remote process entry point (child process)
 //
 // This module is fork()'d by ProcessWorker. It receives the subagent spec
 // and tool module paths via IPC, imports tools, and runs an inline TAOR loop.
 // Results are sent back to the parent via process.send().
 
-import type { Message, TokenUsage } from "@harness/core"
+import type { Message, TokenUsage } from "@taor/core"
 import type { SubagentSpec, SubagentResult } from "./types.js"
 
 // ═══════════════════════════════════════════════════════════════════

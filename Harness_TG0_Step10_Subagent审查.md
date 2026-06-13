@@ -1,4 +1,4 @@
-# Harness Engine — TG0 Step 10 @harness/subagent Adversarial Review
+# Taor — TG0 Step 10 @taor/subagent Adversarial Review
 
 > **审查人视角**：独立架构审计师。审查状态机、Worker TAOR 循环、Coordinator 派发器、harness.ts 集成。
 > **审查日期**：2026-06-12
@@ -321,13 +321,13 @@ Adapter think() 产出 `{ type: "error", error: HarnessError }` 时，Worker swi
 
 | 排位 | Step | 模块 | 评分 | 短评 |
 |------|------|------|------|------|
-| 1 | 8 | @harness/permission | **A** | 最高质量 |
+| 1 | 8 | @taor/permission | **A** | 最高质量 |
 | 2 | 7 | TAOR 核心引擎 | **A-** | 并发路径稳固 |
-| 3 | 9 | @harness/hooks | **B+** | execute() 泛型优雅 |
-| 4 | 5 | @harness/adapters | **A-** | 完整实现 |
+| 3 | 9 | @taor/hooks | **B+** | execute() 泛型优雅 |
+| 4 | 5 | @taor/adapters | **A-** | 完整实现 |
 | 5 | 6 | config.ts | **B+** | NaN 全覆盖 |
-| 6 | 4 | @harness/tools | **B+** | 11 条修复稳固 |
-| **7** | **10** | **@harness/subagent** | **B** | 架构设计干净，状态机/coordinator/worker 分离合理。但**致命问题最多**（F-1/F-2/F-3），修完可升 B+ |
+| 6 | 4 | @taor/tools | **B+** | 11 条修复稳固 |
+| **7** | **10** | **@taor/subagent** | **B** | 架构设计干净，状态机/coordinator/worker 分离合理。但**致命问题最多**（F-1/F-2/F-3），修完可升 B+ |
 
 ---
 

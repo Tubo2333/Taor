@@ -1,4 +1,4 @@
-// @harness/hooks — public API
+// @taor/hooks — public API
 export { HookRegistry } from "./registry.js"
 export type {
   HookName,

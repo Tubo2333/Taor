@@ -1,4 +1,4 @@
-// @harness/adapters — OpenAICompatibleAdapter (abstract base, TG4)
+// @taor/adapters — OpenAICompatibleAdapter (abstract base, TG4)
 //
 // All OpenAI-compatible providers (OpenAI, DeepSeek, etc.) share the same
 // REST API shape: POST /v1/chat/completions with SSE streaming. This base
@@ -24,8 +24,8 @@ import type {
   HarnessError,
   TokenUsage,
   Message,
-} from "@harness/core"
-import type { ToolDescriptor, ToolResult } from "@harness/tools"
+} from "@taor/core"
+import type { ToolDescriptor, ToolResult } from "@taor/tools"
 
 // ═══════════════════════════════════════════════════════════════════
 // ─── Types (OpenAI-specific, not in public API) ───

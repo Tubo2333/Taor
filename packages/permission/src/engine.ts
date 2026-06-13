@@ -1,6 +1,6 @@
-// @harness/permission — PermissionEngine
+// @taor/permission — PermissionEngine
 
-import type { ToolDescriptor, RiskLevel } from "@harness/tools"
+import type { ToolDescriptor, RiskLevel } from "@taor/tools"
 import type { PermissionRule, PermissionVerdict, PermissionConfig, PermissionLevel } from "./types.js"
 import { extractResourceAnnotations, matchResourceConstraint, type ResourceType } from "./resource.js"
 import { matchesGlob } from "./glob.js"

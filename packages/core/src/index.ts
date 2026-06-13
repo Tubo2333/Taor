@@ -1,4 +1,4 @@
-// @harness/core — public API surface
+// @taor/core — public API surface
 export * from "./types.js"
 export * from "./context.js"
 export * from "./events.js"

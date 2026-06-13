@@ -6,8 +6,8 @@
  */
 
 import { describe, it, expect } from "vitest"
-import { createHarness, defineTool } from "@harness/engine"
-import type { HarnessEvent } from "@harness/engine"
+import { createHarness, defineTool } from "@taor/engine"
+import type { HarnessEvent } from "@taor/engine"
 import { MockAdapter, type MockAdapterConfig } from "../fixtures/mock-adapter.js"
 
 // ═══════════════════════════════════════════════════════════════════

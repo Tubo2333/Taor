@@ -1,4 +1,4 @@
-# Harness Engine — TG0 Step 7 TAOR 核心引擎 Adversarial Review
+# Taor — TG0 Step 7 TAOR 核心引擎 Adversarial Review
 
 > **审查人视角**：TypeScript 并发系统专家。1033 行 TAOR 核心引擎是框架心脏，也是单线程 JS 并发最密集的区域。审查重点是 Promise 调度边界上的竞态。
 > **审查日期**：2026-06-11

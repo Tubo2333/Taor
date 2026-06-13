@@ -24,7 +24,7 @@
 ## Registering Hooks
 
 ```typescript
-import { HookRegistry } from "@harness/hooks"
+import { HookRegistry } from "@taor/hooks"
 
 const hooks = new HookRegistry([
   {

@@ -1,4 +1,4 @@
-// @harness/adapters — OpenaiAdapter (TG4 — extends OpenAICompatibleBase)
+// @taor/adapters — OpenaiAdapter (TG4 — extends OpenAICompatibleBase)
 //
 // Thin subclass. All shared logic is in openai-compatible-base.ts.
 // This file only defines: provider, requiredEnvVars, model catalog, defaults.

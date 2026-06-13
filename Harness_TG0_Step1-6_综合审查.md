@@ -1,8 +1,8 @@
-# Harness Engine — TG0 Step 1-6 综合 Adversarial Review
+# Taor — TG0 Step 1-6 综合 Adversarial Review
 
 > **审查人视角**：TypeScript 运行时框架专家，从头审计 types → context → events → tools → adapters → config 六个已完成步骤。
 > **审查日期**：2026-06-11
-> **审查范围**：`@harness/core` (types/context/events/config/session/unresolved/harness) + `@harness/tools` (types/descriptor/base/registry/validation) + `@harness/adapters` (types/anthropic/index)
+> **审查范围**：`@taor/core` (types/context/events/config/session/unresolved/harness) + `@taor/tools` (types/descriptor/base/registry/validation) + `@taor/adapters` (types/anthropic/index)
 > **前置条件**：前序 28 条审查意见已闭环。本审查不重复已修复问题，但修复未到位处会指出。
 > **特别关注**：对下一步 TAOR 循环实现的阻碍。
 
@@ -41,7 +41,7 @@ validateConfig({
 
 ### F-2. `ResolvedConfig.adapter` 为 `undefined` 时无默认值 — Adapter 实例化责任悬空 ✅
 
-**修正内容**：`Harness` 构造函数签名改为 `ResolvedConfig`（`createHarness()` 先调 `validateConfig()` 再传）。Adapter 默认值由 `@harness/engine` 的 `createHarness()` 在后续提供（避免 `@harness/core → @harness/adapters` 循环依赖）。ctr 内加 IMPLEMENTATION NOTE 指引 Step 7 实现 adapter 初始化。
+**修正内容**：`Harness` 构造函数签名改为 `ResolvedConfig`（`createHarness()` 先调 `validateConfig()` 再传）。Adapter 默认值由 `@taor/engine` 的 `createHarness()` 在后续提供（避免 `@taor/core → @taor/adapters` 循环依赖）。ctr 内加 IMPLEMENTATION NOTE 指引 Step 7 实现 adapter 初始化。
 
 ---
 
@@ -59,7 +59,7 @@ validateConfig({
 
 ### I-2. `ToolInput` 类型鸿沟 ✅
 
-**修正内容**：`harness.ts` 构造函数 IMPLEMENTATION NOTE 中已包含 ToolInput cast 指引（`as import("@harness/tools").ToolInput[]`）。
+**修正内容**：`harness.ts` 构造函数 IMPLEMENTATION NOTE 中已包含 ToolInput cast 指引（`as import("@taor/tools").ToolInput[]`）。
 
 ### I-3. System 消息非 text block 被静默丢弃 ✅
 
@@ -91,7 +91,7 @@ TG0 不实现 session 恢复，`resumeFrom` 可以是任意字符串。未来 `d
 
 **文件**：`packages/adapters/src/types.ts:17-21`、`packages/core/src/context.ts:20-27`
 
-TAOR 循环的 ACT 阶段需要把 adapter 输出的 `ParsedToolCall`（LLM 刚产出的）转为运行时追踪用的 `ToolCall`（加 `status: "pending"`、`startedAt: Date.now()`、`retries: 0`）。这个转换逻辑的理想位置是 `@harness/core/src/context.ts`，但它需要引用 `ParsedToolCall`（在 `@harness/adapters` 中）——引入跨包依赖。要么放在 core 中（加 adapter type import），要么放在一个共享的 util 中。TG0 不改——TAOR 循环可以直接内联构造。
+TAOR 循环的 ACT 阶段需要把 adapter 输出的 `ParsedToolCall`（LLM 刚产出的）转为运行时追踪用的 `ToolCall`（加 `status: "pending"`、`startedAt: Date.now()`、`retries: 0`）。这个转换逻辑的理想位置是 `@taor/core/src/context.ts`，但它需要引用 `ParsedToolCall`（在 `@taor/adapters` 中）——引入跨包依赖。要么放在 core 中（加 adapter type import），要么放在一个共享的 util 中。TG0 不改——TAOR 循环可以直接内联构造。
 
 ---
 

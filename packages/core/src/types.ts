@@ -1,4 +1,4 @@
-// @harness/core — foundational types shared across all subsystems
+// @taor/core — foundational types shared across all subsystems
 
 /** Token usage tracking (compliant with Anthropic/OpenAI streaming format) */
 export interface TokenUsage {

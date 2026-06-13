@@ -1,4 +1,4 @@
-// @harness/adapters — public API
+// @taor/adapters — public API
 export type {
   LLMAdapter,
   AdapterFeature,

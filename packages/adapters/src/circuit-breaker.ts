@@ -1,11 +1,11 @@
-// @harness/adapters — CircuitBreakerAdapter (GAP-7)
+// @taor/adapters — CircuitBreakerAdapter (GAP-7)
 //
 // Decorator pattern wrapping LLMAdapter. Standard 3-state breaker:
 // CLOSED → OPEN → HALF_OPEN → CLOSED.
 //
 // ## Design decisions
 //
-// - Resides in @harness/adapters, NOT @harness/core (adapter concern)
+// - Resides in @taor/adapters, NOT @taor/core (adapter concern)
 // - Decorates LLMAdapter — transparent to the TAOR loop
 // - Auto-wrapped by createHarness() when HarnessConfig.circuitBreaker is set
 // - Manual wrapping also supported (pass CircuitBreakerAdapter as `adapter` + circuitBreaker: false)
@@ -23,8 +23,8 @@
 
 import type { LLMAdapter, ThinkEvent, AdapterRequest } from "./types.js"
 import type { RequestOptions } from "./types.js"
-import type { HarnessError, Message, TurnContext } from "@harness/core"
-import type { ToolDescriptor, ToolResult } from "@harness/tools"
+import type { HarnessError, Message, TurnContext } from "@taor/core"
+import type { ToolDescriptor, ToolResult } from "@taor/tools"
 
 // ═══════════════════════════════════════════════════════════════════
 // ─── Types ───

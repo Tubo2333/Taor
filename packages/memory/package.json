@@ -1,7 +1,7 @@
 {
-  "name": "@harness/memory",
+  "name": "@taor/memory",
   "version": "0.1.0",
-  "description": "Harness Engine 3-layer memory — user (SQLite) / project (JSON) / session (in-memory)",
+  "description": "Taor 3-layer memory — user (SQLite) / project (JSON) / session (in-memory)",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -15,7 +15,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@harness/core": "^0.1.0"
+    "@taor/core": "^0.1.0"
   },
   "optionalDependencies": {
     "better-sqlite3": "^11.0.0"
@@ -27,7 +27,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tubo2333/harness-engine"
+    "url": "https://github.com/Tubo2333/taor"
   },
   "keywords": [
     "ai",

@@ -1,4 +1,4 @@
-// @harness/core — HarnessContext (3-layer scope) and all sub-types
+// @taor/core — HarnessContext (3-layer scope) and all sub-types
 
 import type { TokenUsage, CompressLevel, SessionStatus } from "./types.js"
 

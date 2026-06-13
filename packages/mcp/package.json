@@ -1,7 +1,7 @@
 {
-  "name": "@harness/mcp",
+  "name": "@taor/mcp",
   "version": "0.1.0",
-  "description": "Harness Engine MCP consumer — discover and call tools from external MCP servers (stdio/SSE)",
+  "description": "Taor MCP consumer — discover and call tools from external MCP servers (stdio/SSE)",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -15,8 +15,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@harness/core": "^0.1.0",
-    "@harness/tools": "^0.1.0",
+    "@taor/core": "^0.1.0",
+    "@taor/tools": "^0.1.0",
     "@modelcontextprotocol/sdk": "^1.25.0"
   },
   "devDependencies": {
@@ -26,7 +26,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tubo2333/harness-engine"
+    "url": "https://github.com/Tubo2333/taor"
   },
   "keywords": [
     "ai",

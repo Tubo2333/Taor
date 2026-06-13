@@ -4,7 +4,7 @@
  */
 
 import { describe, it, expect } from "vitest"
-import { AnthropicAdapter } from "@harness/engine"
+import { AnthropicAdapter } from "@taor/engine"
 
 // ═══════════════════════════════════════════════════════════════════
 // ─── Helpers ───

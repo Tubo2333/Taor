@@ -1,4 +1,4 @@
-// @harness/tools — Tool abstract base class
+// @taor/tools — Tool abstract base class
 
 import { z } from "zod"
 import { zodToJsonSchema } from "zod-to-json-schema"

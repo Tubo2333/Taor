@@ -1,4 +1,4 @@
-# Harness Engine — TG0 进度总结 & 审查准备（Step 1-6）
+# Taor — TG0 进度总结 & 审查准备（Step 1-6）
 
 > **用途**：粘贴到新 Claude Code 窗口，以独立专家的视角对 Step 1-6 已完成的全部工作进行 adversarial review。
 > **进度**：TG0 12 步中已完成前 6 步（50%）。
@@ -8,7 +8,7 @@
 
 ## 项目是什么
 
-开源的 **Harness Engineering 框架**（TypeScript agent 框架），基于 Claude Code 泄露源码设计。
+开源的 **Taorering 框架**（TypeScript agent 框架），基于 Claude Code 泄露源码设计。
 
 - **语言**：TypeScript（strict, verbatimModuleSyntax, isolatedModules）
 - **模式**：轻量内核 + 可组合引擎（9 个独立 npm 包，workspace 协议）
@@ -21,16 +21,16 @@
 
 ```
 1-3 ✅ types → context → events                          [类型层，纯类型]
-4   ✅ @harness/tools                                    [工具系统，+28条审查]
-5   ✅ @harness/adapters                                 [LLM适配器层]
-6   ✅ @harness/core/config.ts (validateConfig)          [配置校验 — 刚完成]
-7   ⬜ @harness/core/harness.ts (TAOR 循环)              [🔑 核心引擎 — 下一步]
-8   ⬜ @harness/permission
-9   ⬜ @harness/hooks
-10  ⬜ @harness/subagent
-11  ⬜ @harness/memory
-12  ⬜ @harness/compressor
-E   ⬜ @harness/engine (冒烟测试)
+4   ✅ @taor/tools                                    [工具系统，+28条审查]
+5   ✅ @taor/adapters                                 [LLM适配器层]
+6   ✅ @taor/core/config.ts (validateConfig)          [配置校验 — 刚完成]
+7   ⬜ @taor/core/harness.ts (TAOR 循环)              [🔑 核心引擎 — 下一步]
+8   ⬜ @taor/permission
+9   ⬜ @taor/hooks
+10  ⬜ @taor/subagent
+11  ⬜ @taor/memory
+12  ⬜ @taor/compressor
+E   ⬜ @taor/engine (冒烟测试)
 ```
 
 ---
@@ -47,7 +47,7 @@ E   ⬜ @harness/engine (冒烟测试)
 
 ---
 
-## Step 4: @harness/tools（+ 28 条审查修复）
+## Step 4: @taor/tools（+ 28 条审查修复）
 
 ### 核心实现
 
@@ -70,7 +70,7 @@ E   ⬜ @harness/engine (冒烟测试)
 
 ---
 
-## Step 5: @harness/adapters
+## Step 5: @taor/adapters
 
 | 文件 | 行数 | 内容 |
 |------|------|------|
@@ -90,7 +90,7 @@ E   ⬜ @harness/engine (冒烟测试)
 
 ---
 
-## Step 6: @harness/core/config.ts（刚完成）
+## Step 6: @taor/core/config.ts（刚完成）
 
 ### 实现
 

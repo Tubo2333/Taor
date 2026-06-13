@@ -1,4 +1,4 @@
-// @harness/subagent — public API
+// @taor/subagent — public API
 export { SubagentCoordinator } from "./coordinator.js"
 export { SubagentWorker } from "./worker.js"
 export { ProcessWorker } from "./process-worker.js"

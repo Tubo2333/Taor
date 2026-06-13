@@ -1,11 +1,11 @@
-// @harness/subagent — SubagentWorker (inline TAOR loop in same process)
+// @taor/subagent — SubagentWorker (inline TAOR loop in same process)
 
-import type { TokenUsage, Message, Logger } from "@harness/core"
+import type { TokenUsage, Message, Logger } from "@taor/core"
 import type { SubagentSpec, SubagentResult } from "./types.js"
 import type { SubagentHandleImpl } from "./handle.js"
 
 // ═══════════════════════════════════════════════════════════════════
-// ─── Structural interface (avoids importing @harness/adapters) ───
+// ─── Structural interface (avoids importing @taor/adapters) ───
 // ═══════════════════════════════════════════════════════════════════
 
 interface InlineAdapter {

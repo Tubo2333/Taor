@@ -1,4 +1,4 @@
-// @harness/tools — defineTool() factory + tool() shorthand
+// @taor/tools — defineTool() factory + tool() shorthand
 
 import { z } from "zod"
 import { zodToJsonSchema } from "zod-to-json-schema"

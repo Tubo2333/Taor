@@ -3,7 +3,7 @@
 ## 1. Install
 
 ```bash
-npm install @harness/engine @harness/adapters @harness/tools
+npm install @taor/engine @taor/adapters @taor/tools
 ```
 
 ## 2. Set API Key
@@ -24,7 +24,7 @@ export DEEPSEEK_API_KEY=sk-...        # https://platform.deepseek.com/
 ## 2a. Switch Provider
 
 ```typescript
-import { OpenaiAdapter, DeepSeekAdapter } from "@harness/engine"
+import { OpenaiAdapter, DeepSeekAdapter } from "@taor/engine"
 
 // Use OpenAI
 createHarness({ model: "gpt-4.1", adapter: OpenaiAdapter, tools: [] })
@@ -39,7 +39,7 @@ createHarness({ model: "claude-sonnet-4-6", tools: [] })
 ## 3. Define Your First Tool
 
 ```typescript
-import { defineTool } from "@harness/tools"
+import { defineTool } from "@taor/tools"
 
 const greet = defineTool({
   name: "greet",
@@ -60,7 +60,7 @@ const greet = defineTool({
 ## 4. Create and Run Your First Agent
 
 ```typescript
-import { createHarness } from "@harness/engine"
+import { createHarness } from "@taor/engine"
 
 const harness = createHarness({
   model: "claude-sonnet-4-6",
@@ -88,7 +88,7 @@ console.log("Session done. Tokens:", harness.tokenUsage.total)
 ## 5. Full Working Example (20 lines)
 
 ```typescript
-import { createHarness } from "@harness/engine"
+import { createHarness } from "@taor/engine"
 
 const harness = createHarness({
   model: "claude-sonnet-4-6",
@@ -108,7 +108,7 @@ console.log("Done — tokens used:", harness.tokenUsage.total)
 ## 6. Add Circuit Breaker (Production Safety)
 
 ```typescript
-import { createHarness } from "@harness/engine"
+import { createHarness } from "@taor/engine"
 
 const harness = createHarness({
   model: "claude-sonnet-4-6",
@@ -122,11 +122,11 @@ See [circuit-breaker.md](./api/circuit-breaker.md) for full API.
 ## 7. Add MCP Tools (External Tool Servers)
 
 ```bash
-npm install @harness/mcp
+npm install @taor/mcp
 ```
 
 ```typescript
-import { MCPToolBridge } from "@harness/mcp"
+import { MCPToolBridge } from "@taor/mcp"
 
 const bridge = new MCPToolBridge({
   name: "filesystem",

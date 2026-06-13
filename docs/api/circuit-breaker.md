@@ -6,7 +6,7 @@
 ## Quick Start
 
 ```typescript
-import { createHarness } from "@harness/engine"
+import { createHarness } from "@taor/engine"
 
 // Auto-wrap via createHarness (recommended):
 const harness = createHarness({
@@ -56,7 +56,7 @@ interface CircuitBreakerConfig {
 ## Constructor
 
 ```typescript
-import { CircuitBreakerAdapter } from "@harness/adapters"
+import { CircuitBreakerAdapter } from "@taor/adapters"
 
 new CircuitBreakerAdapter(innerAdapter: LLMAdapter, config?: CircuitBreakerConfig)
 ```
@@ -86,7 +86,7 @@ createHarness({
 ### Pattern 3: Manual wrapping (full control)
 
 ```typescript
-import { CircuitBreakerAdapter, AnthropicAdapter } from "@harness/adapters"
+import { CircuitBreakerAdapter, AnthropicAdapter } from "@taor/adapters"
 
 createHarness({
   model: "claude-sonnet-4-6",
@@ -136,11 +136,11 @@ Failures are tracked in a **sliding time window** (`windowDuration`). Failures o
 import {
   CircuitBreakerAdapter,    // class implements LLMAdapter
   CircuitBreakerOpenError,  // thrown when OPEN
-} from "@harness/adapters"
+} from "@taor/adapters"
 import type {
   CircuitBreakerConfig,     // configuration interface
   CircuitBreakerState,      // "CLOSED" | "OPEN" | "HALF_OPEN"
-} from "@harness/adapters"
+} from "@taor/adapters"
 ```
 
 ## Architecture Note

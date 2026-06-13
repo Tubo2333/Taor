@@ -18,7 +18,7 @@
 ### 1. `defineTool()` (Functional)
 
 ```typescript
-import { defineTool } from "@harness/tools"
+import { defineTool } from "@taor/tools"
 
 const myTool = defineTool({
   name: "read_file",
@@ -40,7 +40,7 @@ const myTool = defineTool({
 ### 2. `tool()` (Decorator-style)
 
 ```typescript
-import { tool } from "@harness/tools"
+import { tool } from "@taor/tools"
 
 const myTool = tool({
   name: "search",
@@ -52,7 +52,7 @@ const myTool = tool({
 ### 3. `class extends Tool` (OO, required for process isolation)
 
 ```typescript
-import { Tool } from "@harness/tools"
+import { Tool } from "@taor/tools"
 
 export class ReadFileTool extends Tool {
   // __modulePath metadata required for process isolation

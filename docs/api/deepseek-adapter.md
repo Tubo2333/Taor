@@ -10,7 +10,7 @@ export DEEPSEEK_API_KEY=sk-...   # Get from https://platform.deepseek.com/
 ```
 
 ```typescript
-import { createHarness, DeepSeekAdapter } from "@harness/engine"
+import { createHarness, DeepSeekAdapter } from "@taor/engine"
 
 const harness = createHarness({
   model: "deepseek-chat",

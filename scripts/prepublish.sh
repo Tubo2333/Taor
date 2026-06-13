@@ -1,5 +1,5 @@
 #!/bin/bash
-# Harness Engine — pre-publish verification script
+# Taor — pre-publish verification script
 # Run before `npm publish --workspaces` to verify all quality gates.
 set -e
 

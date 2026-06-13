@@ -1,4 +1,4 @@
-// @harness/tools — ToolRegistry (registration + conflict detection + name validation)
+// @taor/tools — ToolRegistry (registration + conflict detection + name validation)
 
 import type { ToolDescriptor, ToolInput } from "./types.js"
 import { validateToolName } from "./validation.js"

@@ -1,7 +1,7 @@
-// @harness/core — HarnessConfig type + defaults + validation
+// @taor/core — HarnessConfig type + defaults + validation
 //
 // NOTE: AdapterConstructor and ToolInput are defined in ./unresolved.js to avoid
-// circular deps (@harness/adapters → @harness/core, @harness/tools → @harness/core).
+// circular deps (@taor/adapters → @taor/core, @taor/tools → @taor/core).
 // They will be re-exported from their canonical packages once implementation is complete.
 
 import type {
@@ -205,7 +205,7 @@ export function validateConfig(raw: HarnessConfig): ResolvedConfig {
   // ── Permission ──
   //
   // PermissionConfig has real fields in unresolved.ts (for TG0 duck-typing
-  // — canonical type is in @harness/permission since Step 8).
+  // — canonical type is in @taor/permission since Step 8).
   // `as Record<string, unknown>` casts removed since Step 8.
 
   const permission: Partial<PermissionConfig> = {

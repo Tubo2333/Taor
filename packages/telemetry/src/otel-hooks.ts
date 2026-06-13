@@ -1,10 +1,10 @@
-// @harness/telemetry — createOtelHooks (TG4)
+// @taor/telemetry — createOtelHooks (TG4)
 //
 // OpenTelemetry tracing via the existing Hook system — ZERO changes to TAOR loop.
 // Each hook point starts/stops an OTEL span. Users pass in their own Tracer;
 // Harness does not prescribe an exporter — standard OTEL env vars control export.
 
-import type { HookInput } from "@harness/hooks"
+import type { HookInput } from "@taor/hooks"
 import type { Tracer, Span } from "@opentelemetry/api"
 import { trace, context as otelContext } from "@opentelemetry/api"
 
@@ -23,7 +23,7 @@ import { trace, context as otelContext } from "@opentelemetry/api"
  *
  * @example
  * ```typescript
- * import { createOtelHooks } from "@harness/telemetry"
+ * import { createOtelHooks } from "@taor/telemetry"
  * import { trace } from "@opentelemetry/api"
  *
  * const harness = createHarness({

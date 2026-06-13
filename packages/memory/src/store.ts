@@ -1,4 +1,4 @@
-// @harness/memory — MemoryStore implementations (SQLite, JSON file, in-memory)
+// @taor/memory — MemoryStore implementations (SQLite, JSON file, in-memory)
 
 import { createRequire } from "node:module"
 import {

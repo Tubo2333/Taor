@@ -1,6 +1,6 @@
-// @harness/tools — type definitions (no runtime deps from sibling packages)
+// @taor/tools — type definitions (no runtime deps from sibling packages)
 
-import type { ToolCall } from "@harness/core"
+import type { ToolCall } from "@taor/core"
 
 // ─── JSONSchema (JSON Schema Draft-07 minimum viable superset) ───
 //
@@ -100,10 +100,10 @@ export type ApprovalPredicate = (params: unknown, ctx: ToolContext) => boolean
 // ─── Tool context (injected at execute time) ───
 
 export interface ToolContext {
-  session: import("@harness/core").SessionState
-  turn: import("@harness/core").TurnState
+  session: import("@taor/core").SessionState
+  turn: import("@taor/core").TurnState
   signal: AbortSignal
-  logger: import("@harness/core").Logger
+  logger: import("@taor/core").Logger
 }
 
 // ─── ToolDescriptor (internal normalized representation) ───

@@ -1,4 +1,4 @@
-// @harness/core — HarnessEvent union type (14 variants)
+// @taor/core — HarnessEvent union type (14 variants)
 
 import type { TokenUsage, Artifact, CompressLevel } from "./types.js"
 import type { HarnessError } from "./context.js"

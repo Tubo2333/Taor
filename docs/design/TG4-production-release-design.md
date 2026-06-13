@@ -1,8 +1,8 @@
-# TG4 — Harness Engine Production Release Design
+# TG4 — Taor Production Release Design
 
 > **Status**: DRAFT for cross-review
 > **Based on**: TG0→TG3 + 2 architecture reviews, 3 commits deep (`ccd7c16`)
-> **Target**: npm public release `@harness/*` v0.2.0 — production-grade open-source
+> **Target**: npm public release `@taor/*` v0.2.0 — production-grade open-source
 > **Design principle**: Every gap has a design. No gap closed without a design.
 
 ---
@@ -34,8 +34,8 @@
 | Item | Reason |
 |------|--------|
 | 3/7 interface conformance checks (Permission/Hooks/Subagent) | Their canonical types use mapped generics / strict overloads structurally incompatible with the loose `(...args: unknown[])` signatures needed for dependency inversion. The `as any` bridge is the intentional mechanism. |
-| `ToolDef.parameters` as typed JSONSchema | Dependency inversion: `@harness/core` cannot import from `@harness/tools`. `object` is the loosest compatible structural type. |
-| Workflow engine (DAG/step/resume) | Out of scope for v0.2.0. Harness Engine is a runtime, not a workflow orchestrator. |
+| `ToolDef.parameters` as typed JSONSchema | Dependency inversion: `@taor/core` cannot import from `@taor/tools`. `object` is the loosest compatible structural type. |
+| Workflow engine (DAG/step/resume) | Out of scope for v0.2.0. Taor is a runtime, not a workflow orchestrator. |
 | Dev UI / Studio | Out of scope for v0.2.0. CLI + logs are the MVP debugging surface. |
 
 ### 0.3  Pain points confirmed by external review
@@ -59,7 +59,7 @@
 ### 1.1  npm Release Definition
 
 ```
-npm install @harness/engine @harness/adapters @harness/tools
+npm install @taor/engine @taor/adapters @taor/tools
 ```
 
 This command must result in a working agent runtime that:
@@ -103,11 +103,11 @@ This command must result in a working agent runtime that:
 
 ### AD-1. Dependency Inversion Is Preserved
 
-`@harness/core` MUST NOT runtime-import from any sibling package. All cross-package communication goes through structural interfaces in `harness.ts`. The `as any` bridge in `createHarness()` is the **only** place where structural ↔ canonical type bridging occurs.
+`@taor/core` MUST NOT runtime-import from any sibling package. All cross-package communication goes through structural interfaces in `harness.ts`. The `as any` bridge in `createHarness()` is the **only** place where structural ↔ canonical type bridging occurs.
 
 **Why**: This is the foundational architecture decision of the project. Breaking it creates circular project references that TypeScript composite builds cannot resolve.
 
-**Enforcement**: `interface-conformance.check.ts` + code review. Any PR that adds `import from "@harness/adapters"` to `packages/core/src/` is rejected.
+**Enforcement**: `interface-conformance.check.ts` + code review. Any PR that adds `import from "@taor/adapters"` to `packages/core/src/` is rejected.
 
 ### AD-2. Every Adapter Follows the Same Pattern
 
@@ -209,7 +209,7 @@ Or better, create a root-level `tsconfig.typecheck.json` that includes all sourc
 "typecheck": "tsc --project tsconfig.typecheck.json"
 ```
 
-**Tradeoff**: Loses per-package isolation in type-checking. All source files are type-checked as a single compilation unit, which means `@harness/core` files WILL see `@harness/adapters` types during typecheck. This is actually **desirable** for catching interface drift (H3's goal).
+**Tradeoff**: Loses per-package isolation in type-checking. All source files are type-checked as a single compilation unit, which means `@taor/core` files WILL see `@taor/adapters` types during typecheck. This is actually **desirable** for catching interface drift (H3's goal).
 
 **Files changed**:
 - `tsconfig.typecheck.json` (new)
@@ -224,7 +224,7 @@ Or better, create a root-level `tsconfig.typecheck.json` that includes all sourc
 
 **Design**: Mirror AnthropicAdapter exactly, adapting for OpenAI's API differences.
 
-**OpenAI SDK**: `openai` v5.x (latest stable). Declared as `optionalDependencies` in `@harness/adapters/package.json`, falling back to dynamic import with clear error.
+**OpenAI SDK**: `openai` v5.x (latest stable). Declared as `optionalDependencies` in `@taor/adapters/package.json`, falling back to dynamic import with clear error.
 
 **Model Catalog**:
 ```typescript
@@ -450,7 +450,7 @@ if (requiredVars) {
 {
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tubo2333/harness-engine"
+    "url": "https://github.com/Tubo2333/taor"
   },
   "keywords": ["ai", "agent", "llm", "claude", "gpt", "typescript", "taor"],
   "license": "MIT",
@@ -464,7 +464,7 @@ if (requiredVars) {
 **Root package.json** additions:
 ```json
 {
-  "repository": "https://github.com/Tubo2333/harness-engine",
+  "repository": "https://github.com/Tubo2333/taor",
   "author": "Tubo2333",
   "license": "MIT",
   "engines": { "node": ">=20.0.0" }
@@ -543,10 +543,10 @@ jobs:
 - Hooks are the existing extension mechanism for phase-boundary logic.
 - The Hook-based span timing is ~1ms less precise than direct integration — negligible for 99% of observability use cases.
 
-**Implementation**: New package `@harness/telemetry` (optional, per AD-3).
+**Implementation**: New package `@taor/telemetry` (optional, per AD-3).
 
 ```
-@harness/telemetry
+@taor/telemetry
 ├── src/
 │   ├── index.ts          — public API
 │   └── otel-hooks.ts     — `createOtelHooks(tracer)` → HookInput[]
@@ -554,8 +554,8 @@ jobs:
 
 **Core design** — `createOtelHooks()`:
 ```typescript
-// @harness/telemetry/src/otel-hooks.ts
-import type { HookInput } from "@harness/hooks"
+// @taor/telemetry/src/otel-hooks.ts
+import type { HookInput } from "@taor/hooks"
 import type { Tracer, Span } from "@opentelemetry/api"
 import { context } from "@opentelemetry/api"
 
@@ -637,7 +637,7 @@ export function createOtelHooks(tracer: Tracer): HookInput[] {
 
 **User integration** — zero TAOR loop changes:
 ```typescript
-import { createOtelHooks } from "@harness/telemetry"
+import { createOtelHooks } from "@taor/telemetry"
 import { trace } from "@opentelemetry/api"
 
 const tracer = trace.getTracer("harness-agent")
@@ -663,7 +663,7 @@ const harness = createHarness({
 
 **Design**: MCP (Model Context Protocol) allows Harness agents to discover and call tools from external MCP servers. This is a **tool source**, not a new subsystem.
 
-**Architecture**: New package `@harness/mcp` that implements:
+**Architecture**: New package `@taor/mcp` that implements:
 1. An MCP client (using `@modelcontextprotocol/sdk`)
 2. A bridge that converts MCP tools into `ToolDescriptor[]` compatible with `ToolRegistry`
 
@@ -695,7 +695,7 @@ const harness = createHarness({
 **H3 review fix — process cleanup**: The MCP bridge MUST clean up child processes on harness abort/crash. Design:
 
 ```typescript
-// @harness/mcp — MCPToolBridge
+// @taor/mcp — MCPToolBridge
 export class MCPToolBridge {
   private client: Client
   private descriptors: ToolDescriptor[] = []
@@ -765,7 +765,7 @@ const harness = createHarness({
 
 ### GAP-7 (P2): Circuit Breaker
 
-**Design**: Decorator pattern wrapping LLMAdapter. Resides in `@harness/adapters`.
+**Design**: Decorator pattern wrapping LLMAdapter. Resides in `@taor/adapters`.
 
 **States**: CLOSED → OPEN → HALF_OPEN → CLOSED (standard 3-state breaker).
 
@@ -1088,25 +1088,25 @@ Phase 0 items are independent → 5 agents can work in parallel. Phases 1-3 each
 ## §5.  Package Dependency Graph (v0.2.0)
 
 ```
-                         @harness/telemetry (NEW, optional)
+                         @taor/telemetry (NEW, optional)
                               ↓ (decorates)
-@harness/adapters ──→ @harness/core ──→ @harness/tools
+@taor/adapters ──→ @taor/core ──→ @taor/tools
 (Anthropic/OpenAI/     (TAOR loop)       (defineTool/Tool)
  DeepSeek/CB)               ↓
-                    @harness/permission
-                    @harness/hooks
-                    @harness/memory
-                    @harness/compressor
-                    @harness/subagent
+                    @taor/permission
+                    @taor/hooks
+                    @taor/memory
+                    @taor/compressor
+                    @taor/subagent
                          ↓
-                    @harness/mcp (NEW, optional)
+                    @taor/mcp (NEW, optional)
                          ↓
-                    @harness/engine
+                    @taor/engine
                          ↓
-                    @harness/cli
+                    @taor/cli
 ```
 
-**New packages**: `@harness/telemetry` (P1), `@harness/mcp` (P2). Both are **optional** — not in the engine dependency tree by default.
+**New packages**: `@taor/telemetry` (P1), `@taor/mcp` (P2). Both are **optional** — not in the engine dependency tree by default.
 
 ---
 

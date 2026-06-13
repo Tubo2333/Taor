@@ -4,7 +4,7 @@
  */
 
 import { describe, it, expect } from "vitest"
-import { createHarness, AnthropicAdapter, OpenaiAdapter, DeepSeekAdapter } from "@harness/engine"
+import { createHarness, AnthropicAdapter, OpenaiAdapter, DeepSeekAdapter } from "@taor/engine"
 import { MockAdapter } from "../fixtures/mock-adapter.js"
 
 describe("Engine — createHarness edge cases", () => {

@@ -1,4 +1,4 @@
-# Harness Engine — TG0 Step 11 @harness/memory Adversarial Review
+# Taor — TG0 Step 11 @taor/memory Adversarial Review
 
 > **审查人视角**：独立架构审计师。审查 3 种 store 后端 + MemoryFacade + harness.ts/engine 集成。
 > **审查日期**：2026-06-12
@@ -216,14 +216,14 @@ if (!existsSync(dir)) mkdirSync(dir, { recursive: true })
 
 | 排位 | Step | 模块 | 评分 | 短评 |
 |------|------|------|------|------|
-| 1 | 8 | @harness/permission | **A** | 最高质量 |
+| 1 | 8 | @taor/permission | **A** | 最高质量 |
 | 2 | 7 | TAOR 核心引擎 | **A-** | 并发路径稳固 |
-| 3 | 9 | @harness/hooks | **B+** | 泛型优雅 |
-| 4 | 5 | @harness/adapters | **A-** | 完整 650 行实现 |
+| 3 | 9 | @taor/hooks | **B+** | 泛型优雅 |
+| 4 | 5 | @taor/adapters | **A-** | 完整 650 行实现 |
 | 5 | 6 | config.ts | **B+** | NaN 全覆盖 |
-| **6** | **11** | **@harness/memory** | **B+** | 三层架构干净，TTL/logic 正确。JsonStore I/O 行为 (I-1/I-2/I-4/I-5) 是主要拖分项——逻辑无 bug 但在生产环境中会因磁盘故障静默丢数据。修完 4 条重要 + S-2(defaultTtl) 可升 A- |
-| 7 | 4 | @harness/tools | **B+** | 11 条修复稳固 |
-| 8 | 10 | @harness/subagent | **B** | 3 致命已修待验证 |
+| **6** | **11** | **@taor/memory** | **B+** | 三层架构干净，TTL/logic 正确。JsonStore I/O 行为 (I-1/I-2/I-4/I-5) 是主要拖分项——逻辑无 bug 但在生产环境中会因磁盘故障静默丢数据。修完 4 条重要 + S-2(defaultTtl) 可升 A- |
+| 7 | 4 | @taor/tools | **B+** | 11 条修复稳固 |
+| 8 | 10 | @taor/subagent | **B** | 3 致命已修待验证 |
 
 ---
 

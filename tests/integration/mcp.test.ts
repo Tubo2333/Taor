@@ -97,7 +97,7 @@ describe("GAP-6: MCP Consumer Support", () => {
 
   describe("MCPToolBridge — construction", () => {
     it("should reject config with neither command nor url", async () => {
-      const { MCPToolBridge } = await import("@harness/mcp")
+      const { MCPToolBridge } = await import("@taor/mcp")
 
       expect(() => {
         new MCPToolBridge({ name: "bad-server" } as any)
@@ -105,7 +105,7 @@ describe("GAP-6: MCP Consumer Support", () => {
     })
 
     it("should construct successfully with command (stdio)", async () => {
-      const { MCPToolBridge } = await import("@harness/mcp")
+      const { MCPToolBridge } = await import("@taor/mcp")
 
       const bridge = new MCPToolBridge({
         name: "test-stdio",
@@ -119,7 +119,7 @@ describe("GAP-6: MCP Consumer Support", () => {
     })
 
     it("should construct successfully with url (SSE)", async () => {
-      const { MCPToolBridge } = await import("@harness/mcp")
+      const { MCPToolBridge } = await import("@taor/mcp")
 
       const bridge = new MCPToolBridge({
         name: "test-sse",
@@ -136,7 +136,7 @@ describe("GAP-6: MCP Consumer Support", () => {
   describe("MCPToolBridge — connect (tools/list)", () => {
     it("should discover 2 tools from mock MCP server", async () => {
       createMockInstances()
-      const { MCPToolBridge } = await import("@harness/mcp")
+      const { MCPToolBridge } = await import("@taor/mcp")
 
       const bridge = new MCPToolBridge({
         name: "mock-stdio",
@@ -174,7 +174,7 @@ describe("GAP-6: MCP Consumer Support", () => {
 
     it("should throw if connect() called twice", async () => {
       createMockInstances()
-      const { MCPToolBridge } = await import("@harness/mcp")
+      const { MCPToolBridge } = await import("@taor/mcp")
 
       const bridge = new MCPToolBridge({
         name: "double-connect",
@@ -190,7 +190,7 @@ describe("GAP-6: MCP Consumer Support", () => {
 
     it("should register process.on('exit') cleanup handler", async () => {
       createMockInstances()
-      const { MCPToolBridge } = await import("@harness/mcp")
+      const { MCPToolBridge } = await import("@taor/mcp")
 
       const bridge = new MCPToolBridge({
         name: "exit-cleanup",
@@ -217,7 +217,7 @@ describe("GAP-6: MCP Consumer Support", () => {
   describe("MCPToolBridge — execute (tools/call)", () => {
     it("should call tools/call with correct params", async () => {
       createMockInstances()
-      const { MCPToolBridge } = await import("@harness/mcp")
+      const { MCPToolBridge } = await import("@taor/mcp")
 
       // Configure mock to return a specific tool result
       mockClientInstance!.request.mockResolvedValue({
@@ -249,7 +249,7 @@ describe("GAP-6: MCP Consumer Support", () => {
     })
 
     it("should throw if execute() called before connect()", async () => {
-      const { MCPToolBridge } = await import("@harness/mcp")
+      const { MCPToolBridge } = await import("@taor/mcp")
 
       const bridge = new MCPToolBridge({
         name: "not-connected",
@@ -267,7 +267,7 @@ describe("GAP-6: MCP Consumer Support", () => {
   describe("MCPToolBridge — ToolDescriptor.execute()", () => {
     it("should wrap MCP result in ToolResult format via ToolDescriptor.execute()", async () => {
       createMockInstances()
-      const { MCPToolBridge } = await import("@harness/mcp")
+      const { MCPToolBridge } = await import("@taor/mcp")
 
       // request is called twice: first for tools/list (connect), then for tools/call (execute).
       // Return different responses based on the method.
@@ -315,7 +315,7 @@ describe("GAP-6: MCP Consumer Support", () => {
   describe("MCPToolBridge — disconnect", () => {
     it("should be idempotent (safe to call multiple times)", async () => {
       createMockInstances()
-      const { MCPToolBridge } = await import("@harness/mcp")
+      const { MCPToolBridge } = await import("@taor/mcp")
 
       const bridge = new MCPToolBridge({
         name: "idempotent",
@@ -339,7 +339,7 @@ describe("GAP-6: MCP Consumer Support", () => {
 
     it("should clear tools after disconnect", async () => {
       createMockInstances()
-      const { MCPToolBridge } = await import("@harness/mcp")
+      const { MCPToolBridge } = await import("@taor/mcp")
 
       const bridge = new MCPToolBridge({
         name: "clear-tools",
@@ -359,7 +359,7 @@ describe("GAP-6: MCP Consumer Support", () => {
   describe("MCPToolBridge — error handling", () => {
     it("should throw on connect timeout", async () => {
       createMockInstances()
-      const { MCPToolBridge } = await import("@harness/mcp")
+      const { MCPToolBridge } = await import("@taor/mcp")
 
       // Mock connect to hang forever (simulating timeout)
       mockClientInstance!.connect.mockImplementation(

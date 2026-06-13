@@ -206,8 +206,8 @@ import type { IAdapter } from "../harness.js" // 实际上 structural 类型在 
 
 或者在 `harness.ts` 中把所有结构接口加上 `export` 关键字，在 engine 中写：
 ```ts
-import type { IAdapter as StructuralAdapter } from "@harness/core"
-import type { LLMAdapter } from "@harness/adapters"
+import type { IAdapter as StructuralAdapter } from "@taor/core"
+import type { LLMAdapter } from "@taor/adapters"
 const _check1: StructuralAdapter = null as unknown as LLMAdapter
 const _check2: LLMAdapter = null as unknown as StructuralAdapter
 ```

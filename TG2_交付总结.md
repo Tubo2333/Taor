@@ -15,7 +15,7 @@
 ```
 packages/compressor/src/strategies/index.ts  [+30行]  chunk 关键词相关性实现
 packages/tools/src/registry.ts               [+15行]  onConflict 选项 (throw/skip/override)
-packages/cli/                                [NEW]    @harness/cli (harness run/config/tool)
+packages/cli/                                [NEW]    @taor/cli (harness run/config/tool)
 packages/*/package.json                      [×9]     移除 "private": true
 README.md                                    [NEW]    架构图 + 快速开始 + 包列表
 tests/smoke.test.ts                          [+80行]  +6 tests (serialize/memory/chunk/onConflict等)
@@ -58,7 +58,7 @@ harness tool [name]      # 脚手架工具
 ✅ Smoke test  — 16/16 通过 (19ms)
 ```
 
-## 四、Harness Engine 最终全貌
+## 四、Taor 最终全貌
 
 ```
 TG0 + TG1 + TG2 完成

@@ -1,4 +1,4 @@
-// @harness/core — TAOR core loop implementation (TG0 stub)
+// @taor/core — TAOR core loop implementation (TG0 stub)
 
 /**
  * TAORLoop — Think → Act → Observe → Repeat

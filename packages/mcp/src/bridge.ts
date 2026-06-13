@@ -1,16 +1,16 @@
-// @harness/mcp — MCPToolBridge: connect, discover, execute, cleanup
+// @taor/mcp — MCPToolBridge: connect, discover, execute, cleanup
 //
 // Wraps the @modelcontextprotocol/sdk Client to convert MCP server tools into
 // ToolDescriptor[] compatible with ToolRegistry. Handles process lifecycle
 // (spawn on connect, kill on disconnect/exit) and AbortSignal propagation.
 
-import type { ToolDescriptor } from "@harness/tools"
+import type { ToolDescriptor } from "@taor/tools"
 import type { MCPServerConfig, MCPConnectResult } from "./types.js"
 
 // ─── Lazy MCP SDK imports (AD-3: heavy optional dependency) ───
 
 // We use dynamic import() for the MCP SDK because it's a heavy dependency
-// (~1 MB). The SDK is installed when users `npm install @harness/mcp`.
+// (~1 MB). The SDK is installed when users `npm install @taor/mcp`.
 // We cache the imports after first use for performance.
 
 interface McpClient {
@@ -71,7 +71,7 @@ async function loadMcpSdk() {
         `Install it with:\n` +
         `  npm install @modelcontextprotocol/sdk\n` +
         `Or:\n` +
-        `  npm install @harness/mcp\n\n` +
+        `  npm install @taor/mcp\n\n` +
         `Original error: ${(err as Error).message}`,
     )
   }
@@ -306,7 +306,7 @@ export class MCPToolBridge {
    * Convert an MCP tool schema to a ToolDescriptor.
    *
    * The MCP tool's inputSchema is a JSON Schema (Draft-07), compatible with
-   * ToolDescriptor.parameters (also JSONSchema from @harness/tools).
+   * ToolDescriptor.parameters (also JSONSchema from @taor/tools).
    */
   private convertMcpTool(raw: {
     name: string

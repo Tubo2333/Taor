@@ -1,17 +1,17 @@
 # Telemetry API Reference
 
-> `@harness/telemetry` — OpenTelemetry tracing via the Hook system. Zero TAOR loop changes.
+> `@taor/telemetry` — OpenTelemetry tracing via the Hook system. Zero TAOR loop changes.
 > Each hook point starts/stops an OTEL span. Harness does not prescribe an exporter.
 
 ## Quick Start
 
 ```bash
-npm install @harness/telemetry @opentelemetry/api @opentelemetry/sdk-trace-node
+npm install @taor/telemetry @opentelemetry/api @opentelemetry/sdk-trace-node
 ```
 
 ```typescript
-import { createHarness } from "@harness/engine"
-import { createOtelHooks } from "@harness/telemetry"
+import { createHarness } from "@taor/engine"
+import { createOtelHooks } from "@taor/telemetry"
 import { trace } from "@opentelemetry/api"
 
 const harness = createHarness({
@@ -106,19 +106,19 @@ Telemetry is implemented as an **observation layer** through hooks — the exist
 
 ### Dependency (AD-3)
 
-`@harness/telemetry` statically imports `@opentelemetry/api` at module level. The package declares `@opentelemetry/api` as `optionalDependencies` — npm will not fail if it's missing, but the import will throw at runtime. Install explicitly when using telemetry:
+`@taor/telemetry` statically imports `@opentelemetry/api` at module level. The package declares `@opentelemetry/api` as `optionalDependencies` — npm will not fail if it's missing, but the import will throw at runtime. Install explicitly when using telemetry:
 
 ```bash
-npm install @harness/telemetry @opentelemetry/api
+npm install @taor/telemetry @opentelemetry/api
 ```
 
-If you only use `@harness/engine` without telemetry, `@opentelemetry/api` is not pulled in. Only install it alongside `@harness/telemetry`.
+If you only use `@taor/engine` without telemetry, `@opentelemetry/api` is not pulled in. Only install it alongside `@taor/telemetry`.
 
 ## Type Exports
 
 ```typescript
-import { createOtelHooks } from "@harness/telemetry"
-// Returns: HookInput[] (from @harness/hooks)
+import { createOtelHooks } from "@taor/telemetry"
+// Returns: HookInput[] (from @taor/hooks)
 ```
 
 See [hooks.md](./hooks.md) for the full Hook API reference.

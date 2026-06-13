@@ -1,7 +1,7 @@
 {
-  "name": "@harness/tools",
+  "name": "@taor/tools",
   "version": "0.1.0",
-  "description": "Harness Engine tools — ToolDescriptor, defineTool(), Tool class, builtins",
+  "description": "Taor tools — ToolDescriptor, defineTool(), Tool class, builtins",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -15,7 +15,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@harness/core": "^0.1.0",
+    "@taor/core": "^0.1.0",
     "zod": "^3.23.0",
     "zod-to-json-schema": "^3.25.2"
   },
@@ -25,7 +25,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tubo2333/harness-engine"
+    "url": "https://github.com/Tubo2333/taor"
   },
   "keywords": [
     "ai",

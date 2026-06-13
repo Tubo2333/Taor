@@ -1,8 +1,8 @@
-# Harness Engine — TG0 Step 1-5 综合 Adversarial Review
+# Taor — TG0 Step 1-5 综合 Adversarial Review
 
 > **审查人视角**：TypeScript 框架设计专家，从头审计 types → context → events → tools → adapters 五个已完成步骤。
 > **审查日期**：2026-06-11
-> **审查范围**：`@harness/core` (types/context/events/config/session/unresolved/harness) + `@harness/tools` (types/descriptor/base/registry) + `@harness/adapters` (types/anthropic/index) + `tsconfig.base.json`
+> **审查范围**：`@taor/core` (types/context/events/config/session/unresolved/harness) + `@taor/tools` (types/descriptor/base/registry) + `@taor/adapters` (types/anthropic/index) + `tsconfig.base.json`
 > **前置条件**：Step 4 已修复的 11 条问题不在本审查中重复，但修复未覆盖的路径和不到位之处会指出。
 
 ---

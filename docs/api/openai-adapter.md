@@ -9,7 +9,7 @@ export OPENAI_API_KEY=sk-...   # Get from https://platform.openai.com/api-keys
 ```
 
 ```typescript
-import { createHarness, OpenaiAdapter } from "@harness/engine"
+import { createHarness, OpenaiAdapter } from "@taor/engine"
 
 const harness = createHarness({
   model: "gpt-4.1",
@@ -85,7 +85,7 @@ Costs are approximate (2026-06). Check [OpenAI pricing](https://platform.openai.
 To add a new OpenAI-compatible provider, extend `OpenAICompatibleAdapter`:
 
 ```typescript
-import { OpenAICompatibleAdapter } from "@harness/adapters"
+import { OpenAICompatibleAdapter } from "@taor/adapters"
 
 export class MyAdapter extends OpenAICompatibleAdapter {
   static readonly requiredEnvVars = ["MY_API_KEY"]

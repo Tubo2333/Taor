@@ -1,4 +1,4 @@
-// @harness/memory — type definitions
+// @taor/memory — type definitions
 
 export interface MemoryStoreConfig {
   backend: "sqlite" | "json" | "memory"

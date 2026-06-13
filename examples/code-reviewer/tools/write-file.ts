@@ -8,7 +8,7 @@
  * - onBeforeExecute hook for pre-flight path validation
  */
 
-import { defineTool } from "@harness/engine"
+import { defineTool } from "@taor/engine"
 import { z } from "zod"
 import { writeFile } from "node:fs/promises"
 

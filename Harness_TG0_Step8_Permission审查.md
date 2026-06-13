@@ -1,4 +1,4 @@
-# Harness Engine — TG0 Step 8 @harness/permission Adversarial Review
+# Taor — TG0 Step 8 @taor/permission Adversarial Review
 
 > **审查人视角**：独立架构审计师。审查 permission 模块实现质量、ACT phase 集成、config 校验和依赖反转桥接。
 > **审查日期**：2026-06-12

@@ -1,7 +1,7 @@
 {
-  "name": "@harness/engine",
+  "name": "@taor/engine",
   "version": "0.1.0",
-  "description": "Harness Engine — aggregation package. createHarness() + re-exports all subsystems",
+  "description": "Taor — aggregation package. createHarness() + re-exports all subsystems",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -15,14 +15,14 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@harness/core": "^0.1.0",
-    "@harness/adapters": "^0.1.0",
-    "@harness/tools": "^0.1.0",
-    "@harness/permission": "^0.1.0",
-    "@harness/hooks": "^0.1.0",
-    "@harness/subagent": "^0.1.0",
-    "@harness/memory": "^0.1.0",
-    "@harness/compressor": "^0.1.0"
+    "@taor/core": "^0.1.0",
+    "@taor/adapters": "^0.1.0",
+    "@taor/tools": "^0.1.0",
+    "@taor/permission": "^0.1.0",
+    "@taor/hooks": "^0.1.0",
+    "@taor/subagent": "^0.1.0",
+    "@taor/memory": "^0.1.0",
+    "@taor/compressor": "^0.1.0"
   },
   "devDependencies": {
     "typescript": "^5.7.0"
@@ -30,7 +30,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tubo2333/harness-engine"
+    "url": "https://github.com/Tubo2333/taor"
   },
   "keywords": [
     "ai",

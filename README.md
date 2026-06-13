@@ -1,4 +1,4 @@
-# Harness Engine
+# Taor
 
 > TypeScript AI Agent Runtime — TAOR Loop + 6 Pluggable Subsystems
 
@@ -10,11 +10,11 @@
 
 ```bash
 export ANTHROPIC_API_KEY=sk-ant-...   # Get from https://console.anthropic.com/
-npm install @harness/engine @harness/adapters @harness/tools
+npm install @taor/engine @taor/adapters @taor/tools
 ```
 
 ```typescript
-import { createHarness } from "@harness/engine"
+import { createHarness } from "@taor/engine"
 
 const harness = createHarness({
   model: "claude-sonnet-4-6",
@@ -45,18 +45,18 @@ for await (const event of harness) {
 
 | Package | Description | v0.2.0 |
 |---------|-------------|--------|
-| `@harness/engine` | Aggregation entry point (`createHarness`) | ✅ |
-| `@harness/core` | TAOR loop, config, events, types | ✅ |
-| `@harness/adapters` | LLM adapters (Anthropic + OpenAI + DeepSeek) | ✅ NEW |
-| `@harness/tools` | Tool definition + registry | ✅ |
-| `@harness/permission` | 4-tier (deny/boundary/allow/ask) | ✅ |
-| `@harness/hooks` | 13-point lifecycle hooks | ✅ |
-| `@harness/subagent` | Inline + process sub-agents | ✅ |
-| `@harness/memory` | 3-layer memory (user/project/session) | ✅ |
-| `@harness/compressor` | 5-layer context compression | ✅ |
-| `@harness/cli` | CLI: harness run/config/tool | ✅ NEW |
-| `@harness/telemetry` | OpenTelemetry hooks (OTLP/console) | ✅ NEW |
-| `@harness/mcp` | MCP consumer — external tool servers | ✅ NEW |
+| `@taor/engine` | Aggregation entry point (`createHarness`) | ✅ |
+| `@taor/core` | TAOR loop, config, events, types | ✅ |
+| `@taor/adapters` | LLM adapters (Anthropic + OpenAI + DeepSeek) | ✅ NEW |
+| `@taor/tools` | Tool definition + registry | ✅ |
+| `@taor/permission` | 4-tier (deny/boundary/allow/ask) | ✅ |
+| `@taor/hooks` | 13-point lifecycle hooks | ✅ |
+| `@taor/subagent` | Inline + process sub-agents | ✅ |
+| `@taor/memory` | 3-layer memory (user/project/session) | ✅ |
+| `@taor/compressor` | 5-layer context compression | ✅ |
+| `@taor/cli` | CLI: harness run/config/tool | ✅ NEW |
+| `@taor/telemetry` | OpenTelemetry hooks (OTLP/console) | ✅ NEW |
+| `@taor/mcp` | MCP consumer — external tool servers | ✅ NEW |
 
 ## v0.2.0
 

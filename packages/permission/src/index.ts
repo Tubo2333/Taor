@@ -1,4 +1,4 @@
-// @harness/permission — public API
+// @taor/permission — public API
 export { PermissionEngine } from "./engine.js"
 export type { PermissionConfig, PermissionRule, PermissionVerdict, PermissionLevel } from "./types.js"
 export {

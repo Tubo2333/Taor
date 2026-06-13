@@ -1,4 +1,4 @@
-// @harness/subagent — SubagentHandle implementation (lifecycle state machine)
+// @taor/subagent — SubagentHandle implementation (lifecycle state machine)
 
 import type {
   SubagentHandle,
@@ -7,7 +7,7 @@ import type {
   SubagentError,
   SubagentHeartbeat,
 } from "./types.js"
-import type { Unsubscribe, TokenUsage } from "@harness/core"
+import type { Unsubscribe, TokenUsage } from "@taor/core"
 
 // ═══════════════════════════════════════════════════════════════════
 // ─── SubagentHandleImpl ───

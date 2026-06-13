@@ -1,6 +1,6 @@
-// @harness/hooks — HookRegistry (chain-style registration + priority + short-circuit)
+// @taor/hooks — HookRegistry (chain-style registration + priority + short-circuit)
 
-import type { Unsubscribe, HarnessError, Logger } from "@harness/core"
+import type { Unsubscribe, HarnessError, Logger } from "@taor/core"
 import type {
   HookName,
   HookHandlerMap,

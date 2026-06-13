@@ -1,4 +1,4 @@
-// @harness/adapters — DeepSeekAdapter (TG4 — extends OpenAICompatibleBase)
+// @taor/adapters — DeepSeekAdapter (TG4 — extends OpenAICompatibleBase)
 //
 // Thin subclass. All shared logic is in openai-compatible-base.ts.
 // DeepSeek uses the OpenAI-compatible API shape (chat/completions).

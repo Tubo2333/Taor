@@ -1,15 +1,15 @@
-# TG0 Step 8 — @harness/permission 交付总结
+# TG0 Step 8 — @taor/permission 交付总结
 
 > **完成时间**：2026-06-12
 > **审查状态**：⏳ 待独立审查
 > **上一步**：Step 7 TAOR 循环（63 条审查闭环）
-> **下一步**：Step 9 @harness/hooks
+> **下一步**：Step 9 @taor/hooks
 
 ---
 
 ## 一、做了什么
 
-实现了 `@harness/permission` 包 — Harness Engine 的 4 级权限系统，并集成到 TAOR 核心循环的 ACT phase。
+实现了 `@taor/permission` 包 — Taor 的 4 级权限系统，并集成到 TAOR 核心循环的 ACT phase。
 
 ### 文件清单
 
@@ -65,15 +65,15 @@ packages/engine/src/
 ### 2.3 依赖反转
 
 ```
-@harness/core (harness.ts)
+@taor/core (harness.ts)
   ├── IPermissionEngine    ← 结构接口（避免循环引用）
   ├── IPermissionVerdict   ← 结构接口
   └── setPermission()      ← 注入方法
 
-@harness/permission (engine.ts)
-  └── PermissionEngine     ← 真实实现（依赖 @harness/core + @harness/tools）
+@taor/permission (engine.ts)
+  └── PermissionEngine     ← 真实实现（依赖 @taor/core + @taor/tools）
 
-@harness/engine (index.ts)
+@taor/engine (index.ts)
   └── createHarness()      ← 组装层：创建 PermissionEngine → 注入 Harness
       as any 桥接结构接口 ↔ 真实类型（与 IAdapter/IToolRegistry 同模式）
 ```
@@ -93,7 +93,7 @@ ACT phase 中权限检查分两层：
 
 | # | 决策 | 理由 |
 |---|------|------|
-| D-1 | 结构接口 IPermissionEngine 而非 import | 避免 @harness/core → @harness/permission 循环引用（与 IAdapter/IToolRegistry 同模式） |
+| D-1 | 结构接口 IPermissionEngine 而非 import | 避免 @taor/core → @taor/permission 循环引用（与 IAdapter/IToolRegistry 同模式） |
 | D-2 | 双层权限（PermissionEngine → 内置 risk） | 组织策略和工具自我声明是正交维度，不应相互取代 |
 | D-3 | 构造函数注入 ToolDescriptor[] | createHarness() 从 ToolRegistry.list() 同步，用于 @resource 注解查找 |
 | D-4 | boundary 规则遇无 @resource 注解工具 → 降级 ask | 按 API §8.2 规范：无法强制执行边界时，宁可询问也不阻断 |
@@ -144,16 +144,16 @@ ACT phase 中权限检查分两层：
 
 ```
 1-3 ⬜✅ types → context → events     [类型层]
-4   ✅ @harness/tools                  [工具系统]
-5   ✅ @harness/adapters               [LLM适配器]
-6   ✅ @harness/core/config.ts         [配置校验]
-7   ✅ @harness/core/harness.ts        [TAOR 循环]
-8   ✅ @harness/permission             [← 本次完成]
-9   ⬜ @harness/hooks                  [下一步]
-10  ⬜ @harness/subagent
-11  ⬜ @harness/memory
-12  ⬜ @harness/compressor
-E   ⬜ @harness/engine (冒烟测试)
+4   ✅ @taor/tools                  [工具系统]
+5   ✅ @taor/adapters               [LLM适配器]
+6   ✅ @taor/core/config.ts         [配置校验]
+7   ✅ @taor/core/harness.ts        [TAOR 循环]
+8   ✅ @taor/permission             [← 本次完成]
+9   ⬜ @taor/hooks                  [下一步]
+10  ⬜ @taor/subagent
+11  ⬜ @taor/memory
+12  ⬜ @taor/compressor
+E   ⬜ @taor/engine (冒烟测试)
 ```
 
 完成度：7/12 → **8/12（67%）**

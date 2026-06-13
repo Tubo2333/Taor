@@ -6,10 +6,10 @@
  */
 
 import { describe, it, expect, vi, beforeEach } from "vitest"
-import { CircuitBreakerAdapter, CircuitBreakerOpenError } from "@harness/adapters"
-import type { LLMAdapter, ThinkEvent, AdapterRequest } from "@harness/adapters"
-import type { Message, TurnContext, HarnessError } from "@harness/core"
-import type { ToolDescriptor, ToolResult } from "@harness/tools"
+import { CircuitBreakerAdapter, CircuitBreakerOpenError } from "@taor/adapters"
+import type { LLMAdapter, ThinkEvent, AdapterRequest } from "@taor/adapters"
+import type { Message, TurnContext, HarnessError } from "@taor/core"
+import type { ToolDescriptor, ToolResult } from "@taor/tools"
 
 // ═══════════════════════════════════════════════════════════════════
 // ─── Mock Adapter ───

@@ -4,7 +4,7 @@
  * Demonstrates: low-risk tool, fs-read permission, fallback strategy (rg → grep/findstr).
  */
 
-import { defineTool } from "@harness/engine"
+import { defineTool } from "@taor/engine"
 import { z } from "zod"
 import { execFile } from "node:child_process"
 import { promisify } from "node:util"

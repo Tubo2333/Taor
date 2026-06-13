@@ -1,48 +1,48 @@
-// @harness/engine — aggregation package (one-stop import)
+// @taor/engine — aggregation package (one-stop import)
 
-import { Harness, validateConfig } from "@harness/core"
-import type { HarnessConfig, ResolvedConfig, SerializedSession } from "@harness/core"
-import { AnthropicAdapter, CircuitBreakerAdapter } from "@harness/adapters"
-import { ToolRegistry } from "@harness/tools"
-import type { ToolInput, ToolDescriptor } from "@harness/tools"
-import { PermissionEngine } from "@harness/permission"
-import type { PermissionConfig } from "@harness/permission"
-import { HookRegistry } from "@harness/hooks"
-import type { HookInput } from "@harness/hooks"
-import { SubagentCoordinator } from "@harness/subagent"
-import type { SubagentSpec, SubagentHandle } from "@harness/subagent"
-import { MemoryFacade } from "@harness/memory"
-import type { MemoryConfig } from "@harness/memory"
-import { CompressorPipeline } from "@harness/compressor"
-import type { CompressorConfig } from "@harness/compressor"
+import { Harness, validateConfig } from "@taor/core"
+import type { HarnessConfig, ResolvedConfig, SerializedSession } from "@taor/core"
+import { AnthropicAdapter, CircuitBreakerAdapter } from "@taor/adapters"
+import { ToolRegistry } from "@taor/tools"
+import type { ToolInput, ToolDescriptor } from "@taor/tools"
+import { PermissionEngine } from "@taor/permission"
+import type { PermissionConfig } from "@taor/permission"
+import { HookRegistry } from "@taor/hooks"
+import type { HookInput } from "@taor/hooks"
+import { SubagentCoordinator } from "@taor/subagent"
+import type { SubagentSpec, SubagentHandle } from "@taor/subagent"
+import { MemoryFacade } from "@taor/memory"
+import type { MemoryConfig } from "@taor/memory"
+import { CompressorPipeline } from "@taor/compressor"
+import type { CompressorConfig } from "@taor/compressor"
 
 // Re-export all subsystems
-export { Harness, validateConfig } from "@harness/core"
-export type { HarnessConfig, ResolvedConfig, SessionResult, SerializedSession, Logger, TelemetryConfig } from "@harness/core"
-export type { HarnessEvent, UserDecision } from "@harness/core"
-export type { HarnessContext, SessionState, TurnState, SharedCacheState, TurnContext, SessionContext } from "@harness/core"
-export type { ToolCall, Observation, HarnessError, TokenUsage, Artifact, Unsubscribe, TurnRecord, CompressLevel } from "@harness/core"
+export { Harness, validateConfig } from "@taor/core"
+export type { HarnessConfig, ResolvedConfig, SessionResult, SerializedSession, Logger, TelemetryConfig } from "@taor/core"
+export type { HarnessEvent, UserDecision } from "@taor/core"
+export type { HarnessContext, SessionState, TurnState, SharedCacheState, TurnContext, SessionContext } from "@taor/core"
+export type { ToolCall, Observation, HarnessError, TokenUsage, Artifact, Unsubscribe, TurnRecord, CompressLevel } from "@taor/core"
 
-export { defineTool, tool, Tool, ToolRegistry } from "@harness/tools"
-export type { ToolDescriptor, ToolResult, ToolContext, JSONSchema, PermissionHint, RiskLevel, RetryPolicy } from "@harness/tools"
+export { defineTool, tool, Tool, ToolRegistry } from "@taor/tools"
+export type { ToolDescriptor, ToolResult, ToolContext, JSONSchema, PermissionHint, RiskLevel, RetryPolicy } from "@taor/tools"
 
-export { AnthropicAdapter, OpenaiAdapter, DeepSeekAdapter } from "@harness/adapters"
-export type { LLMAdapter, AdapterFeature, ThinkEvent, ParsedToolCall, ModelInfo } from "@harness/adapters"
+export { AnthropicAdapter, OpenaiAdapter, DeepSeekAdapter } from "@taor/adapters"
+export type { LLMAdapter, AdapterFeature, ThinkEvent, ParsedToolCall, ModelInfo } from "@taor/adapters"
 
-export { PermissionEngine } from "@harness/permission"
-export type { PermissionConfig, PermissionRule, PermissionVerdict, PermissionLevel } from "@harness/permission"
+export { PermissionEngine } from "@taor/permission"
+export type { PermissionConfig, PermissionRule, PermissionVerdict, PermissionLevel } from "@taor/permission"
 
-export { HookRegistry } from "@harness/hooks"
-export type { HookName, HookHandlerMap, HookRegistration, HookInput, ErrorRecovery } from "@harness/hooks"
+export { HookRegistry } from "@taor/hooks"
+export type { HookName, HookHandlerMap, HookRegistration, HookInput, ErrorRecovery } from "@taor/hooks"
 
-export { SubagentCoordinator, SubagentWorker } from "@harness/subagent"
-export type { SubagentSpec, SubagentHandle, SubagentResult, SubagentError, SubagentStatus } from "@harness/subagent"
+export { SubagentCoordinator, SubagentWorker } from "@taor/subagent"
+export type { SubagentSpec, SubagentHandle, SubagentResult, SubagentError, SubagentStatus } from "@taor/subagent"
 
-export { MemoryFacade, InMemoryStore, JsonStore, SqliteStore } from "@harness/memory"
-export type { MemoryConfig, MemoryStoreConfig, MemoryStore, MemoryEntry } from "@harness/memory"
+export { MemoryFacade, InMemoryStore, JsonStore, SqliteStore } from "@taor/memory"
+export type { MemoryConfig, MemoryStoreConfig, MemoryStore, MemoryEntry } from "@taor/memory"
 
-export { CompressorPipeline } from "@harness/compressor"
-export type { CompressorConfig, CompressStrategy, CompressedContext } from "@harness/compressor"
+export { CompressorPipeline } from "@taor/compressor"
+export type { CompressorConfig, CompressStrategy, CompressedContext } from "@taor/compressor"
 
 /**
  * createHarness — recommended entry point.
@@ -52,7 +52,7 @@ export type { CompressorConfig, CompressStrategy, CompressedContext } from "@har
  *
  * ## Dependency inversion contract matrix
  *
- * `@harness/core` uses structural interfaces (IAdapter/IToolRegistry/ToolDef/
+ * `@taor/core` uses structural interfaces (IAdapter/IToolRegistry/ToolDef/
  * ToolExecResult/ThinkEvent) to avoid circular project references. The `as any`
  * cast below bridges the structural types to their canonical definitions.
  *
@@ -63,11 +63,11 @@ export type { CompressorConfig, CompressStrategy, CompressedContext } from "@har
  * ┌──────────────────────┬─────────────────────────────────┐
  * │ Harness (structural) │ Real (canonical)                │
  * ├──────────────────────┼─────────────────────────────────┤
- * │ IAdapter             │ LLMAdapter (@harness/adapters)  │
- * │ IToolRegistry        │ ToolRegistry (@harness/tools)   │
- * │ ToolDef              │ ToolDescriptor (@harness/tools) │
- * │ ToolExecResult       │ ToolResult (@harness/tools)     │
- * │ ThinkEvent (local)   │ ThinkEvent (@harness/adapters)  │
+ * │ IAdapter             │ LLMAdapter (@taor/adapters)  │
+ * │ IToolRegistry        │ ToolRegistry (@taor/tools)   │
+ * │ ToolDef              │ ToolDescriptor (@taor/tools) │
+ * │ ToolExecResult       │ ToolResult (@taor/tools)     │
+ * │ ThinkEvent (local)   │ ThinkEvent (@taor/adapters)  │
  * └──────────────────────┴─────────────────────────────────┘
  * ```
  *
@@ -143,8 +143,8 @@ export function createHarness(
       `HarnessConfig: MCP servers configured but createHarness() is synchronous.\n` +
         `MCP initialization is asynchronous (it spawns child processes / connects to servers).\n` +
         `Use the two-step initialization pattern:\n\n` +
-        `  import { createHarness } from "@harness/engine"\n` +
-        `  import { MCPToolBridge } from "@harness/mcp"\n\n` +
+        `  import { createHarness } from "@taor/engine"\n` +
+        `  import { MCPToolBridge } from "@taor/mcp"\n\n` +
         `  const harness = createHarness({ model: "...", tools: [...] })\n` +
         `  const bridge = new MCPToolBridge({ name: "my-server", command: "npx", args: [...] })\n` +
         `  const tools = await bridge.connect()\n` +
@@ -160,8 +160,8 @@ export function createHarness(
 
   // Build permission engine.
   // ResolvedConfig.permission is Partial<PermissionConfig> where PermissionConfig
-  // is stubbed as {} in @harness/core's unresolved.ts. The real type is in
-  // @harness/permission. We cast through unknown to bridge the stub/real gap.
+  // is stubbed as {} in @taor/core's unresolved.ts. The real type is in
+  // @taor/permission. We cast through unknown to bridge the stub/real gap.
   //
   // Tool descriptors are extracted from the registry for @resource annotation
   // lookup within the permission engine. `list()` returns ToolDescriptor[] —
@@ -173,19 +173,19 @@ export function createHarness(
   )
 
   // Inject permission engine — cast needed because Harness uses structural
-  // IPermissionEngine (to avoid circular deps on @harness/permission).
+  // IPermissionEngine (to avoid circular deps on @taor/permission).
   // PermissionEngine satisfies IPermissionEngine structurally.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   harness.setPermission(permEngine as any)
 
   // Build hook registry from config.
-  // ResolvedConfig.hooks is HookInput[] — the real type lives in @harness/hooks.
+  // ResolvedConfig.hooks is HookInput[] — the real type lives in @taor/hooks.
   const hookRegistry = new HookRegistry(
     resolved.hooks as unknown as HookInput[],
   )
 
   // Inject hook registry — cast needed because Harness uses structural
-  // IHookRegistry (to avoid circular deps on @harness/hooks).
+  // IHookRegistry (to avoid circular deps on @taor/hooks).
   // HookRegistry satisfies IHookRegistry structurally.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   harness.setHooks(hookRegistry as any)
@@ -206,20 +206,20 @@ export function createHarness(
   )
 
   // Inject subagent coordinator — cast needed because Harness uses structural
-  // ISubagentCoordinator (to avoid circular deps on @harness/subagent).
+  // ISubagentCoordinator (to avoid circular deps on @taor/subagent).
   // SubagentCoordinator satisfies ISubagentCoordinator structurally.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   harness.setSubagent(subagentCoordinator as any)
 
   // Build memory facade.
   // ResolvedConfig.memory is Partial<MemoryConfig> (stubbed as {} in core).
-  // The real type is in @harness/memory.
+  // The real type is in @taor/memory.
   const memoryFacade = new MemoryFacade(
     resolved.memory as unknown as Partial<MemoryConfig>,
   )
 
   // Inject memory facade — cast needed because Harness uses structural
-  // IMemoryFacade (to avoid circular deps on @harness/memory).
+  // IMemoryFacade (to avoid circular deps on @taor/memory).
   // MemoryFacade satisfies IMemoryFacade structurally.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   harness.setMemory(memoryFacade as any)
@@ -231,7 +231,7 @@ export function createHarness(
   )
 
   // Inject compressor — cast needed because Harness uses structural
-  // ICompressorPipeline (to avoid circular deps on @harness/compressor).
+  // ICompressorPipeline (to avoid circular deps on @taor/compressor).
   // CompressorPipeline satisfies ICompressorPipeline structurally.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   harness.setCompressor(compressorPipeline as any)

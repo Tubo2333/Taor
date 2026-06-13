@@ -1,7 +1,7 @@
-// @harness/subagent — type definitions
+// @taor/subagent — type definitions
 
-import type { TokenUsage, Artifact, Unsubscribe } from "@harness/core"
-import type { ToolInput } from "@harness/tools"
+import type { TokenUsage, Artifact, Unsubscribe } from "@taor/core"
+import type { ToolInput } from "@taor/tools"
 import type { z } from "zod"
 
 export type SubagentStatus = "pending" | "starting" | "running" | "done" | "error" | "aborted"

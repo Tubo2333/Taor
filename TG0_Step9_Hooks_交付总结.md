@@ -1,15 +1,15 @@
-# TG0 Step 9 — @harness/hooks 交付总结
+# TG0 Step 9 — @taor/hooks 交付总结
 
 > **完成时间**：2026-06-12
 > **审查状态**：⏳ 待交叉审查
-> **上一步**：Step 8 @harness/permission（含 9 条审查修复）
-> **下一步**：Step 10 @harness/subagent
+> **上一步**：Step 8 @taor/permission（含 9 条审查修复）
+> **下一步**：Step 10 @taor/subagent
 
 ---
 
 ## 一、做了什么
 
-实现了 `@harness/hooks` 包 — 13 个 TAOR 生命周期 Hook 点的链式注册、优先级排序执行、短路语义和错误隔离。并集成到 harness.ts 的 TAOR 核心循环中。
+实现了 `@taor/hooks` 包 — 13 个 TAOR 生命周期 Hook 点的链式注册、优先级排序执行、短路语义和错误隔离。并集成到 harness.ts 的 TAOR 核心循环中。
 
 ### 文件清单
 
@@ -80,15 +80,15 @@ runTAOR()
 ### 2.4 依赖反转
 
 ```
-@harness/core (harness.ts)
+@taor/core (harness.ts)
   ├── IHookRegistry       ← 结构接口（类型擦除为 unknown[] 参数/返回值）
   ├── setHooks()          ← 注入方法
   └── hooks getter        ← 返回注入的 registry（未注入时抛错）
 
-@harness/hooks (registry.ts)
-  └── HookRegistry        ← 真实实现（依赖 @harness/core + @harness/adapters + @harness/tools）
+@taor/hooks (registry.ts)
+  └── HookRegistry        ← 真实实现（依赖 @taor/core + @taor/adapters + @taor/tools）
 
-@harness/engine (index.ts)
+@taor/engine (index.ts)
   └── createHarness()     ← 组装：new HookRegistry(config.hooks) → harness.setHooks()
 ```
 
@@ -159,10 +159,10 @@ ThinkEvent 在流式消费时已经通过 `pushEvent()` 发射给消费者。`af
 
 ```
 1-9 ✅ (75%)
-10  ⬜ @harness/subagent     ← 下一步
-11  ⬜ @harness/memory
-12  ⬜ @harness/compressor
-E   ⬜ @harness/engine (冒烟测试)
+10  ⬜ @taor/subagent     ← 下一步
+11  ⬜ @taor/memory
+12  ⬜ @taor/compressor
+E   ⬜ @taor/engine (冒烟测试)
 ```
 
 ---

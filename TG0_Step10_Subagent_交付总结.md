@@ -1,15 +1,15 @@
-# TG0 Step 10 — @harness/subagent 交付总结
+# TG0 Step 10 — @taor/subagent 交付总结
 
 > **完成时间**：2026-06-12
 > **审查状态**：⏳ 待交叉审查
-> **上一步**：Step 9 @harness/hooks（含 8 条审查修复）
-> **下一步**：Step 11 @harness/memory
+> **上一步**：Step 9 @taor/hooks（含 8 条审查修复）
+> **下一步**：Step 11 @taor/memory
 
 ---
 
 ## 一、做了什么
 
-实现了 `@harness/subagent` 包 — Sub-agent 派发与生命周期管理。包含 SubagentHandleImpl 完整状态机（6 状态、5 事件类型）、SubagentWorker 内联 TAOR 循环、SubagentCoordinator spawn() 派发器。集成到 harness.ts 的 `spawn()` 方法。
+实现了 `@taor/subagent` 包 — Sub-agent 派发与生命周期管理。包含 SubagentHandleImpl 完整状态机（6 状态、5 事件类型）、SubagentWorker 内联 TAOR 循环、SubagentCoordinator spawn() 派发器。集成到 harness.ts 的 `spawn()` 方法。
 
 ### 文件清单
 
@@ -96,17 +96,17 @@ spawn(spec)
 ### 2.5 依赖反转
 
 ```
-@harness/core (harness.ts)
+@taor/core (harness.ts)
   ├── ISubagentCoordinator  ← 结构接口（类型擦除）
   ├── setSubagent()         ← 注入方法
   └── spawn()               ← 委托给 coordinator
 
-@harness/subagent
+@taor/subagent
   ├── SubagentHandleImpl    ← 状态机 + 事件
   ├── SubagentWorker        ← 内联 TAOR
   └── SubagentCoordinator   ← spawn() 派发
 
-@harness/engine (index.ts)
+@taor/engine (index.ts)
   └── createHarness()       ← 组装 + 注入
 ```
 
@@ -117,7 +117,7 @@ spawn(spec)
 | # | 决策 | 理由 |
 |---|------|------|
 | D-1 | TG0 inline isolation only | process/worktree 需 IPC/fork + 工具类序列化，复杂度过高，延后 TG1 |
-| D-2 | Worker 定义独立 InlineAdapter/InlineTool 结构接口 | 避免 import @harness/adapters → 循环引用 |
+| D-2 | Worker 定义独立 InlineAdapter/InlineTool 结构接口 | 避免 import @taor/adapters → 循环引用 |
 | D-3 | Coordinator 定义独立 CoordinatorAdapter/CoordinatorTool | 同上，但二者不兼容导致 `as any` 桥接。TG1 应统一为共享类型 |
 | D-4 | handle.abort() 转发到 worker.abort() | 替换原始 abort 方法，确保 abort 同时更新状态机 + 停止 worker |
 | D-5 | worker.run() 后台执行（不 await） | spawn() 返回同步 handle → 调用方可用 `await handle.done()` 等待 |
@@ -162,9 +162,9 @@ Coordinator 在 `worker.run().then(...)` 之前替换 `handle.abort`。如果在
 
 ```
 1-10 ✅ (83%)
-11   ⬜ @harness/memory       ← 下一步
-12   ⬜ @harness/compressor
-E    ⬜ @harness/engine (冒烟测试)
+11   ⬜ @taor/memory       ← 下一步
+12   ⬜ @taor/compressor
+E    ⬜ @taor/engine (冒烟测试)
 ```
 
 ---

@@ -7,7 +7,7 @@
 Factory function. Creates and configures a full Harness instance with all subsystems wired.
 
 ```typescript
-import { createHarness } from "@harness/engine"
+import { createHarness } from "@taor/engine"
 
 const harness = createHarness({
   model: "claude-sonnet-4-6",

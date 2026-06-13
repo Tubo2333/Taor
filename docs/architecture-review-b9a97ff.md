@@ -81,8 +81,8 @@ set registry(r: IToolRegistry) { this._registry = r }
 **修复**: 在 `interface-conformance.check.ts` 末尾加：
 
 ```ts
-import type { IToolRegistry } from "@harness/core"
-import { ToolRegistry } from "@harness/tools"
+import type { IToolRegistry } from "@taor/core"
+import { ToolRegistry } from "@taor/tools"
 
 // ToolRegistry.get()/list()/register() must stay compatible with IToolRegistry
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

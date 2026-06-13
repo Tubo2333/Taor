@@ -6,10 +6,10 @@
  */
 
 import { describe, it, expect, beforeEach } from "vitest"
-import { createOtelHooks } from "@harness/telemetry"
+import { createOtelHooks } from "@taor/telemetry"
 import type { Tracer, Span, SpanAttributes } from "@opentelemetry/api"
 import { context as otelContext } from "@opentelemetry/api"
-import type { HookInput } from "@harness/hooks"
+import type { HookInput } from "@taor/hooks"
 
 // ═══════════════════════════════════════════════════════════════════
 // ─── Mock Tracer — records span lifecycle ───

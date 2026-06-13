@@ -1,4 +1,4 @@
-// @harness/compressor/strategies — 5-layer cheap-first compression
+// @taor/compressor/strategies — 5-layer cheap-first compression
 //
 // TG0: trim + truncate are fully implemented.
 //      summarize / chunk / embed are stubs (require LLM adapter / embedding model).
@@ -6,7 +6,7 @@
 // Pipeline order (cheapest first):
 //   trim → summarize → chunk → embed → truncate
 
-import type { CompressLevel, TurnContext, Message } from "@harness/core"
+import type { CompressLevel, TurnContext, Message } from "@taor/core"
 import type { CompressStrategy, CompressedContext } from "../types.js"
 
 // ═══════════════════════════════════════════════════════════════════

@@ -1,4 +1,4 @@
-// @harness/memory — MemoryFacade (harness.memory)
+// @taor/memory — MemoryFacade (harness.memory)
 
 import type { MemoryConfig, MemoryStore, MemoryStoreConfig } from "./types.js"
 import { InMemoryStore, JsonStore, SqliteStore } from "./store.js"

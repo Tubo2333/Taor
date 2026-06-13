@@ -1,16 +1,16 @@
-// @harness/hooks — hook type definitions
+// @taor/hooks — hook type definitions
 
 import type {
   SessionContext,
   TurnContext,
   HarnessError,
   CompressLevel,
-} from "@harness/core"
-import type { SessionResult } from "@harness/core"
-import type { ToolCall } from "@harness/core"
-import type { ThinkEvent } from "@harness/adapters"
-import type { ToolResult } from "@harness/tools"
-import type { Observation } from "@harness/core"
+} from "@taor/core"
+import type { SessionResult } from "@taor/core"
+import type { ToolCall } from "@taor/core"
+import type { ThinkEvent } from "@taor/adapters"
+import type { ToolResult } from "@taor/tools"
+import type { Observation } from "@taor/core"
 
 // ─── Error recovery ───
 
@@ -52,7 +52,7 @@ export interface HookHandlerMap {
 
   // Compress
   beforeCompress: (ctx: TurnContext, level: CompressLevel) => Promise<void>
-  afterCompress: (ctx: TurnContext, event: import("@harness/core").CompressedEvent) => Promise<void>
+  afterCompress: (ctx: TurnContext, event: import("@taor/core").CompressedEvent) => Promise<void>
 
   // Error
   onError: (ctx: SessionContext, error: HarnessError) => Promise<ErrorRecovery | void>

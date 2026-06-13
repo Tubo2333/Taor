@@ -4,7 +4,7 @@
  * Demonstrates: low-risk tool, fs-read permission, line-range support.
  */
 
-import { defineTool } from "@harness/engine"
+import { defineTool } from "@taor/engine"
 import { z } from "zod"
 import { readFile } from "node:fs/promises"
 

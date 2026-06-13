@@ -1,6 +1,6 @@
-// @harness/permission — @resource annotation parser + constraint matcher
+// @taor/permission — @resource annotation parser + constraint matcher
 
-import type { ToolDescriptor, JSONSchemaProperty } from "@harness/tools"
+import type { ToolDescriptor, JSONSchemaProperty } from "@taor/tools"
 import { matchesGlob } from "./glob.js"
 
 /**

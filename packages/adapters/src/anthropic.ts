@@ -1,4 +1,4 @@
-// @harness/adapters — AnthropicAdapter (full TG0 implementation)
+// @taor/adapters — AnthropicAdapter (full TG0 implementation)
 
 import Anthropic from "@anthropic-ai/sdk"
 import type {
@@ -16,8 +16,8 @@ import type {
   HarnessError,
   TokenUsage,
   Message,
-} from "@harness/core"
-import type { ToolDescriptor, ToolResult } from "@harness/tools"
+} from "@taor/core"
+import type { ToolDescriptor, ToolResult } from "@taor/tools"
 
 // ═══════════════════════════════════════════════════════════════════
 // ─── Model Catalog ───
@@ -669,7 +669,7 @@ export class AnthropicAdapter implements LLMAdapter {
     callId: string,
     result: ToolResult,
     _toolName?: string,
-  ): import("@harness/core").Message {
+  ): import("@taor/core").Message {
     const rawBlock = this.formatToolResult(callId, result) as Anthropic.ToolResultBlockParam
 
     // Guarantee content is a string — MessageContent.tool_result.content
@@ -680,7 +680,7 @@ export class AnthropicAdapter implements LLMAdapter {
         ? rawBlock.content
         : JSON.stringify(rawBlock.content)
 
-    const block: import("@harness/core").MessageContent = {
+    const block: import("@taor/core").MessageContent = {
       type: "tool_result",
       tool_use_id: callId,
       content,

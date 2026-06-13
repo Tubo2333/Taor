@@ -1,7 +1,7 @@
 /**
- * @harness/engine — compile-time interface conformance guard.
+ * @taor/engine — compile-time interface conformance guard.
  *
- * Detects structural interface drift between @harness/core's dependency-inversion
+ * Detects structural interface drift between @taor/core's dependency-inversion
  * interfaces and the canonical subsystem types. Runs as part of `npm run typecheck`.
  *
  * ## How to use
@@ -16,7 +16,7 @@
  * ## Checked interfaces
  *
  * ┌──────────────────────────┬─────────────────────────────────┐
- * │ Structural (@harness/core)│ Canonical                       │
+ * │ Structural (@taor/core)│ Canonical                       │
  * ├──────────────────────────┼─────────────────────────────────┤
  * │ IAdapter                 │ AnthropicAdapter                 │
  * │ IMemoryFacade            │ MemoryFacade                     │
@@ -35,12 +35,12 @@ import type {
   IMemoryFacade,
   ICompressorPipeline,
   IToolRegistry,
-} from "@harness/core"
+} from "@taor/core"
 
-import { AnthropicAdapter } from "@harness/adapters"
-import { MemoryFacade } from "@harness/memory"
-import { CompressorPipeline } from "@harness/compressor"
-import { ToolRegistry } from "@harness/tools"
+import { AnthropicAdapter } from "@taor/adapters"
+import { MemoryFacade } from "@taor/memory"
+import { CompressorPipeline } from "@taor/compressor"
+import { ToolRegistry } from "@taor/tools"
 
 // Each check: canonical instance is assignable to the structural interface.
 // If a canonical class adds a required method/field that the structural

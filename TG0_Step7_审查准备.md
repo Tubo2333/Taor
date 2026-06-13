@@ -1,4 +1,4 @@
-# Harness Engine — TG0 Step 7 审查准备（TAOR 核心引擎）
+# Taor — TG0 Step 7 审查准备（TAOR 核心引擎）
 
 > **用途**：粘贴到新 Claude Code 窗口，以独立专家视角对 TAOR 核心引擎做最严苛的 adversarial review。
 > **进度**：TG0 12 步中已完成前 7 步（58%）。**Step 7 是整个框架的心脏。**
@@ -8,7 +8,7 @@
 
 ## 项目是什么
 
-开源的 **Harness Engineering 框架**（TypeScript agent 框架），基于 Claude Code 泄露源码设计。
+开源的 **Taorering 框架**（TypeScript agent 框架），基于 Claude Code 泄露源码设计。
 
 - **语言**：TypeScript（strict, verbatimModuleSyntax, isolatedModules, composite project references）
 - **模式**：轻量内核 + 可组合引擎（9 个独立 npm 包，workspace 协议）
@@ -22,16 +22,16 @@
 
 ```
 1-3 ✅ types → context → events                          [类型层，纯类型]
-4   ✅ @harness/tools                                    [工具系统，+28条审查]
-5   ✅ @harness/adapters                                 [LLM适配器层，650行]
-6   ✅ @harness/core/config.ts                           [配置校验，NaN全覆盖]
-7   ✅ @harness/core/harness.ts (TAOR 循环)              [🔑 核心引擎 — 1033行]
-8   ⬜ @harness/permission                               [下一步]
-9   ⬜ @harness/hooks
-10  ⬜ @harness/subagent
-11  ⬜ @harness/memory
-12  ⬜ @harness/compressor
-E   ⬜ @harness/engine (冒烟测试)
+4   ✅ @taor/tools                                    [工具系统，+28条审查]
+5   ✅ @taor/adapters                                 [LLM适配器层，650行]
+6   ✅ @taor/core/config.ts                           [配置校验，NaN全覆盖]
+7   ✅ @taor/core/harness.ts (TAOR 循环)              [🔑 核心引擎 — 1033行]
+8   ⬜ @taor/permission                               [下一步]
+9   ⬜ @taor/hooks
+10  ⬜ @taor/subagent
+11  ⬜ @taor/memory
+12  ⬜ @taor/compressor
+E   ⬜ @taor/engine (冒烟测试)
 ```
 
 ---
@@ -47,7 +47,7 @@ E   ⬜ @harness/engine (冒烟测试)
 ```
                          ┌──────────────────────────────────┐
                          │         createHarness()           │
-                         │       (@harness/engine)           │
+                         │       (@taor/engine)           │
                          │  validateConfig → new Harness()   │
                          └──────────────┬───────────────────┘
                                         │
@@ -77,15 +77,15 @@ E   ⬜ @harness/engine (冒烟测试)
 
 ### 依赖反转（关键架构决策）
 
-`@harness/core` 不能运行时 import `@harness/tools` 或 `@harness/adapters`（TypeScript composite project references 形成 DAG 环）。解决方案：
+`@taor/core` 不能运行时 import `@taor/tools` 或 `@taor/adapters`（TypeScript composite project references 形成 DAG 环）。解决方案：
 
 | 组件 | 真实定义 | core 中使用 | 如何桥接 |
 |------|---------|------------|---------|
-| Adapter | `LLMAdapter` in `@harness/adapters` | `IAdapter` 结构接口（私有） | `createHarness()` 传入 `AnthropicAdapter` 实例 → `as any` cast |
-| ToolRegistry | `ToolRegistry` in `@harness/tools` | `IToolRegistry` 结构接口（私有） | `createHarness()` 创建实例 + register → `as any` cast |
-| ToolDescriptor | `ToolDescriptor` in `@harness/tools` | `ToolDef` 结构接口（私有） | 结构兼容 |
-| ToolResult | `ToolResult<T>` in `@harness/tools` | `ToolExecResult` 结构接口（私有） | 结构兼容 |
-| ThinkEvent | `ThinkEvent` in `@harness/adapters` | 本地 `ThinkEvent` 联合类型（私有） | 结构兼容 |
+| Adapter | `LLMAdapter` in `@taor/adapters` | `IAdapter` 结构接口（私有） | `createHarness()` 传入 `AnthropicAdapter` 实例 → `as any` cast |
+| ToolRegistry | `ToolRegistry` in `@taor/tools` | `IToolRegistry` 结构接口（私有） | `createHarness()` 创建实例 + register → `as any` cast |
+| ToolDescriptor | `ToolDescriptor` in `@taor/tools` | `ToolDef` 结构接口（私有） | 结构兼容 |
+| ToolResult | `ToolResult<T>` in `@taor/tools` | `ToolExecResult` 结构接口（私有） | 结构兼容 |
+| ThinkEvent | `ThinkEvent` in `@taor/adapters` | 本地 `ThinkEvent` 联合类型（私有） | 结构兼容 |
 
 ### Harness 构造函数
 
@@ -257,7 +257,7 @@ Consumer: harness.next({type:"approve", callId:"xxx"})
 - `heartbeat` 事件 — 定义了但从未被 yield。TAOR 循环是否有超时心跳机制？
 
 **维度 4：依赖反转的类型安全**
-- `IAdapter` / `IToolRegistry` / `ToolDef` / `ToolExecResult` 是私有结构接口 — 它们与 `@harness/adapters` 和 `@harness/tools` 的真实类型是否完全兼容？
+- `IAdapter` / `IToolRegistry` / `ToolDef` / `ToolExecResult` 是私有结构接口 — 它们与 `@taor/adapters` 和 `@taor/tools` 的真实类型是否完全兼容？
 - `createHarness()` 中用 `as any` 桥接结构接口 — 如果未来 adapter 或 registry 的接口增加必需字段，在哪一层会先断裂？编译期还是运行时？
 - `ToolCallResult.result` 在 `context.ts` 中是 `unknown`，在 harness.ts 中被 `as ToolExecResult` 强转 — TTOR 循环如何保证运行时类型确实匹配？
 - `AdapterRequest = unknown` 来回传递 — `buildRequest()` 产出和 `think()` 消费之间的类型契约完全靠约定，没有编译期保证。这是 accept 的 tradeoff 还是有更好的方案？

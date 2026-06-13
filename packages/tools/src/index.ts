@@ -1,4 +1,4 @@
-// @harness/tools — public API
+// @taor/tools — public API
 export { defineTool, tool } from "./descriptor.js"
 export { Tool } from "./base.js"
 export type { ToolDescriptor, ToolResult, ToolResultMeta, ToolErrorCode, ToolContext, JSONSchema, JSONSchemaProperty, RetryPolicy, PermissionHint, RiskLevel, ApprovalPredicate, ToolInput, ToolConstructor } from "./types.js"

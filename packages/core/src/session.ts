@@ -1,4 +1,4 @@
-// @harness/core — session lifecycle + SessionResult + SerializedSession
+// @taor/core — session lifecycle + SessionResult + SerializedSession
 
 import type { TokenUsage, Artifact, CompressLevel } from "./types.js"
 import type { Message } from "./context.js"

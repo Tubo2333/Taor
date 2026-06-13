@@ -29,8 +29,8 @@
  * Requires: ANTHROPIC_API_KEY or OPENAI_API_KEY environment variable.
  */
 
-import { createHarness } from "@harness/engine"
-import type { HarnessEvent, UserDecision } from "@harness/engine"
+import { createHarness } from "@taor/engine"
+import type { HarnessEvent, UserDecision } from "@taor/engine"
 import { readFileTool } from "./tools/read-file.js"
 import { grepTool } from "./tools/grep.js"
 import { writeFileTool } from "./tools/write-file.js"
@@ -96,7 +96,7 @@ async function main() {
   const { dir, prompt, model, maxTurns } = parseArgs()
 
   console.log(`╔══════════════════════════════════════════════════════╗`)
-  console.log(`║  Code Reviewer Agent — Harness Engine v0.2.0        ║`)
+  console.log(`║  Code Reviewer Agent — Taor v0.2.0        ║`)
   console.log(`╠══════════════════════════════════════════════════════╣`)
   console.log(`║  Model:     ${model.padEnd(42)}║`)
   console.log(`║  Directory: ${dir.padEnd(42)}║`)
