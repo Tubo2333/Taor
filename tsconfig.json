@@ -1,0 +1,41 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "packages/core"
+    },
+    {
+      "path": "packages/tools"
+    },
+    {
+      "path": "packages/adapters"
+    },
+    {
+      "path": "packages/permission"
+    },
+    {
+      "path": "packages/hooks"
+    },
+    {
+      "path": "packages/subagent"
+    },
+    {
+      "path": "packages/memory"
+    },
+    {
+      "path": "packages/compressor"
+    },
+    {
+      "path": "packages/engine"
+    },
+    {
+      "path": "packages/cli"
+    },
+    {
+      "path": "packages/telemetry"
+    },
+    {
+      "path": "packages/mcp"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "name": "@harness/engine",
+  "version": "0.1.0",
+  "description": "Harness Engine — aggregation package. createHarness() + re-exports all subsystems",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@harness/core": "^0.1.0",
+    "@harness/adapters": "^0.1.0",
+    "@harness/tools": "^0.1.0",
+    "@harness/permission": "^0.1.0",
+    "@harness/hooks": "^0.1.0",
+    "@harness/subagent": "^0.1.0",
+    "@harness/memory": "^0.1.0",
+    "@harness/compressor": "^0.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tubo2333/harness-engine"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "llm",
+    "claude",
+    "gpt",
+    "typescript",
+    "taor"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

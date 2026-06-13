@@ -1,0 +1,36 @@
+{
+  "name": "harness-engine-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Harness Engine — open-source TypeScript agent framework monorepo",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean",
+    "typecheck": "tsc --project tsconfig.typecheck.json",
+    "lint": "eslint packages/*/src --ext .ts",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@vitest/coverage-v8": "^2.1.9",
+    "eslint": "^9.0.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tubo2333/harness-engine"
+  },
+  "author": "Tubo2333",
+  "license": "MIT"
+}

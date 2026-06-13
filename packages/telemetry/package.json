@@ -1,0 +1,38 @@
+{
+  "name": "@harness/telemetry",
+  "version": "0.1.0",
+  "description": "Harness Engine OpenTelemetry hooks — zero TAOR changes, span-per-phase observability",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@harness/core": "^0.1.0",
+    "@harness/hooks": "^0.1.0"
+  },
+  "optionalDependencies": {
+    "@opentelemetry/api": "^1.9.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tubo2333/harness-engine"
+  },
+  "keywords": ["ai", "agent", "llm", "telemetry", "opentelemetry", "observability"],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
