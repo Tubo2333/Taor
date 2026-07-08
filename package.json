@@ -32,9 +32,6 @@
     "permission-engine"
   ],
   "author": "Zuo Xin (Tubo2333)",
-  "pnpm": {
-    "onlyBuiltDependencies": ["esbuild"]
-  },
   "license": "MIT",
   "repository": {
     "type": "git",
