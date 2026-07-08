@@ -6,6 +6,11 @@ const taorPackages = [
   "tools", "memory", "subagent", "compressor", "telemetry", "mcp", "cli",
 ]
 
+// MCP integration tests need a mock binary not available in CI — skip them there
+const exclude = process.env.CI
+  ? ["tests/integration/mcp.test.ts"]
+  : []
+
 export default defineConfig({
   resolve: {
     alias: Object.fromEntries(
@@ -17,6 +22,7 @@ export default defineConfig({
   },
   test: {
     include: ["tests/**/*.test.ts"],
+    exclude,
     retry: 2,
   },
 })
