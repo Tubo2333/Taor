@@ -2,6 +2,7 @@
   "name": "taor",
   "version": "0.1.0",
   "private": true,
+  "workspaces": ["packages/*"],
   "description": "Taor — TypeScript Agent Orchestration Runtime. 12 packages, AsyncGenerator-based TAOR loop, 4-tier permission engine, sub-agent process isolation.",
   "scripts": {
     "build": "pnpm -r run build",

@@ -10,11 +10,8 @@ jobs:
         node-version: [22, 24]
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with: { version: latest }
       - uses: actions/setup-node@v4
         with: { node-version: "${{ matrix.node-version }}" }
-      - run: pnpm install --no-frozen-lockfile --ignore-scripts
-      - run: pnpm build
-      - run: pnpm typecheck
-      - run: pnpm test
+      - run: npm install --workspaces --ignore-scripts
+      - run: npx tsc -b
+      - run: npx vitest run
