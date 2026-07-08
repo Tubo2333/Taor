@@ -1,0 +1,8 @@
+src/
+tsconfig.json
+tsconfig.tsbuildinfo
+*.md
+!README.md
+tests/
+node_modules/
+!dist/

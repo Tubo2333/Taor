@@ -1,0 +1,40 @@
+{
+  "name": "@taor/core",
+  "version": "0.1.0",
+  "description": "Taor core — types, context, events, config, harness, TAOR loop",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tubo2333/taor"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "llm",
+    "claude",
+    "gpt",
+    "typescript",
+    "taor"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

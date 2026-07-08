@@ -1,0 +1,45 @@
+{
+  "name": "@taor/subagent",
+  "version": "0.1.0",
+  "description": "Taor sub-agent system — Coordinator/Worker with inline/process/worktree isolation",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@taor/core": "^0.1.0",
+    "@taor/tools": "^0.1.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tubo2333/taor"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "llm",
+    "claude",
+    "gpt",
+    "typescript",
+    "taor"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

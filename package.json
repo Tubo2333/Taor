@@ -1,0 +1,39 @@
+{
+  "name": "taor",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Taor — TypeScript Agent Orchestration Runtime. 12 packages, AsyncGenerator-based TAOR loop, 4-tier permission engine, sub-agent process isolation.",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "typecheck": "pnpm -r run typecheck",
+    "test": "vitest run",
+    "demo": "npx tsx examples/demo.ts",
+    "lint": "eslint packages/ --ext .ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "llm",
+    "claude",
+    "gpt",
+    "typescript",
+    "taor",
+    "agent-runtime",
+    "multi-agent",
+    "permission-engine"
+  ],
+  "author": "Zuo Xin (Tubo2333)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tubo2333/taor"
+  }
+}

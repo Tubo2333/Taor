@@ -1,0 +1,10 @@
+// @taor/core — public API surface
+export * from "./types.js"
+export * from "./context.js"
+export * from "./events.js"
+export * from "./config.js"
+export * from "./session.js"
+export { Harness } from "./harness.js"
+export type { IAdapter, IToolRegistry, IPermissionEngine, IHookRegistry, ISubagentCoordinator, IMemoryFacade, ICompressorPipeline } from "./harness.js"
+export { TAORLoop } from "./taor-loop.js"
+export { validateEnv } from "./env.js"

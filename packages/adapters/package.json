@@ -1,0 +1,48 @@
+{
+  "name": "@taor/adapters",
+  "version": "0.1.0",
+  "description": "Taor adapters — LLMAdapter interface + Anthropic/OpenAI/DeepSeek implementations",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.104.1",
+    "@taor/core": "^0.1.0",
+    "@taor/tools": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  },
+  "type": "module",
+  "optionalDependencies": {
+    "openai": "^5.23.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tubo2333/taor"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "llm",
+    "claude",
+    "gpt",
+    "typescript",
+    "taor"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

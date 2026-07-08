@@ -1,0 +1,39 @@
+{
+  "name": "@taor/cli",
+  "version": "0.1.0",
+  "description": "Taor CLI — run agents, generate configs, scaffold tools",
+  "main": "./dist/index.js",
+  "bin": {
+    "harness": "./dist/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@taor/engine": "^0.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tubo2333/taor"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "llm",
+    "claude",
+    "gpt",
+    "typescript",
+    "taor"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
