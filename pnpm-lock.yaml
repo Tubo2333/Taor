@@ -63,12 +63,18 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0
     devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.0
       typescript:
         specifier: ^5.7.0
         version: 5.9.3
 
   packages/core:
     devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.0
       typescript:
         specifier: ^5.7.0
         version: 5.9.3
@@ -100,6 +106,9 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0
     devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.0
       typescript:
         specifier: ^5.7.0
         version: 5.9.3
@@ -116,6 +125,9 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0
     devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.0
       typescript:
         specifier: ^5.7.0
         version: 5.9.3
@@ -165,6 +177,9 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0
     devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.0
       typescript:
         specifier: ^5.7.0
         version: 5.9.3
@@ -197,6 +212,9 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0(zod@3.25.76)
     devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.0
       typescript:
         specifier: ^5.7.0
         version: 5.9.3
@@ -217,6 +235,9 @@ importers:
         specifier: ^3.25.2
         version: 3.25.2(zod@3.25.76)
     devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.0
       typescript:
         specifier: ^5.7.0
         version: 5.9.3
