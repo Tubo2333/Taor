@@ -81,8 +81,8 @@ async function main() {
       rules: [{ level: "boundary" as const, pattern: "ReadFile", resourceConstraints: { paramAnnotation: "file" as const, denylist: ["/etc/**", "**/secrets**", "**/.env**"], allowlist: ["/app/**"] }, reason: "Resource boundary" }],
     },
     hooks: [
-      ...createOtelHooks(tracer),
-      { name: "audit", hooks: ["afterAct"], handler: async (_ctx: any, call: any, result: any) => { console.log(`  [audit] ${call?.name}(${call?.arguments?.path}) → ${result?.ok ? "OK" : "BLOCKED"}`); } },
+      createOtelHooks(tracer),
+      { afterAct: async (_ctx: any, call: any, result: any) => { console.log(`  [audit] ${call?.name}(${call?.arguments?.path}) → ${result?.ok ? "OK" : "BLOCKED"}`); } },
     ],
   });
 

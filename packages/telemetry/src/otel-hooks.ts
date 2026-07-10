@@ -34,26 +34,24 @@ import { trace, context as otelContext } from "@opentelemetry/api"
  * ```
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function createOtelHooks(tracer: Tracer): HookInput[] {
-  // Span bookkeeping — keyed by turn.id / call.id / "session" / "compress"
+export function createOtelHooks(tracer: Tracer): HookInput {
   const spans = new Map<string, Span>()
 
-  return [
+  const registrations = [
     // ═══════════════════════════════════════════════════════════════
     // ─── Session root span ───
     // ═══════════════════════════════════════════════════════════════
-
     {
-      hook: "onSessionStart",
+      hook: "onSessionStart" as const,
       handler: async (ctx: any) => {
         const span = tracer.startSpan("Session")
         span.setAttribute("sessionId", ctx.session.id)
         span.setAttribute("model", ctx.session.model)
         spans.set("session", span)
       },
-    } as HookInput,
+    },
     {
-      hook: "onSessionEnd",
+      hook: "onSessionEnd" as const,
       handler: async (ctx: any, result: any) => {
         const span = spans.get("session")
         if (span) {
@@ -64,53 +62,48 @@ export function createOtelHooks(tracer: Tracer): HookInput[] {
           spans.delete("session")
         }
       },
-    } as HookInput,
+    },
 
     // ═══════════════════════════════════════════════════════════════
     // ─── THINK phase ───
     // ═══════════════════════════════════════════════════════════════
-
     {
-      hook: "beforeThink",
+      hook: "beforeThink" as const,
       priority: 1000,
       handler: async (ctx: any) => {
         const span = tracer.startSpan("THINK", {
-          attributes: {
-            turnIndex: ctx.turn.index,
-            model: ctx.session.model,
-          },
+          attributes: { turnIndex: ctx.turn.index, model: ctx.session.model },
         })
         spans.set(ctx.turn.id, span)
       },
-    } as HookInput,
+    },
     {
-      hook: "afterThink",
+      hook: "afterThink" as const,
       priority: 0,
       handler: async (ctx: any, _events: any) => {
         const span = spans.get(ctx.turn.id)
         if (span) {
           span.setAttribute("turnCount", ctx.session.turnCount)
           span.end()
-          spans.delete(ctx.turn.id) // M-NEW-1: prevent Map memory leak
+          spans.delete(ctx.turn.id)
         }
       },
-    } as HookInput,
+    },
 
     // ═══════════════════════════════════════════════════════════════
     // ─── ACT phase — per-tool spans ───
     // ═══════════════════════════════════════════════════════════════
-
     {
-      hook: "beforeAct",
+      hook: "beforeAct" as const,
       priority: 1000,
       handler: async (ctx: any, call: any) => {
         const span = tracer.startSpan(`tool:${call.name}`)
         span.setAttribute("tool.name", call.name)
         spans.set(call.id, span)
       },
-    } as HookInput,
+    },
     {
-      hook: "afterAct",
+      hook: "afterAct" as const,
       priority: 0,
       handler: async (ctx: any, call: any, result: any) => {
         const span = spans.get(call.id)
@@ -118,20 +111,18 @@ export function createOtelHooks(tracer: Tracer): HookInput[] {
           span.setAttribute("ok", result.ok)
           span.setAttribute("duration", result.meta?.duration ?? 0)
           span.end()
-          spans.delete(call.id) // M-NEW-1
+          spans.delete(call.id)
         }
       },
-    } as HookInput,
+    },
 
     // ═══════════════════════════════════════════════════════════════
-    // ─── Error span — linked to current turn span ───
+    // ─── Error span ───
     // ═══════════════════════════════════════════════════════════════
-
     {
-      hook: "onError",
+      hook: "onError" as const,
       priority: 1000,
       handler: async (ctx: any, error: any) => {
-        // If a turn span is active, make it the parent via OTEL context
         const turnSpan = spans.get(ctx.turn?.id ?? "")
         const parentCtx = turnSpan
           ? trace.setSpan(otelContext.active(), turnSpan)
@@ -140,22 +131,21 @@ export function createOtelHooks(tracer: Tracer): HookInput[] {
         span.recordException(error instanceof Error ? error : new Error(error.message ?? String(error)))
         span.end()
       },
-    } as HookInput,
+    },
 
     // ═══════════════════════════════════════════════════════════════
     // ─── Compressor span ───
     // ═══════════════════════════════════════════════════════════════
-
     {
-      hook: "beforeCompress",
+      hook: "beforeCompress" as const,
       priority: 1000,
       handler: async (ctx: any, _level: any) => {
         const span = tracer.startSpan("compress")
         spans.set("compress", span)
       },
-    } as HookInput,
+    },
     {
-      hook: "afterCompress",
+      hook: "afterCompress" as const,
       priority: 0,
       handler: async (ctx: any, event: any) => {
         const span = spans.get("compress")
@@ -164,9 +154,11 @@ export function createOtelHooks(tracer: Tracer): HookInput[] {
           span.setAttribute("afterTokens", event.afterTokens)
           span.setAttribute("savingsPercent", event.savingsPercent)
           span.end()
-          spans.delete("compress") // M-NEW-1
+          spans.delete("compress")
         }
       },
-    } as HookInput,
+    },
   ]
+
+  return registrations
 }

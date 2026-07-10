@@ -146,15 +146,11 @@ async function main() {
     },
     // ★ The key line: inject OTEL hooks alongside business hooks
     hooks: [
-      ...createOtelHooks(getTracer()),
-      {
-        name: "audit-logger",
-        hooks: ["afterAct"],
-        handler: async (_ctx: any, call: any, result: any) => {
+      createOtelHooks(getTracer()),
+      { afterAct: async (_ctx: any, call: any, result: any) => {
           const icon = result?.ok ? "OK" : "BLOCKED";
           console.log(`  [audit] ${call?.name}(${call?.arguments?.path}) → ${icon}`);
-        },
-      },
+        } },
     ],
   });
 
