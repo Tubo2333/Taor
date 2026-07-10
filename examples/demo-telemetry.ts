@@ -106,7 +106,7 @@ const readFileTool = {
     properties: { path: { type: "string", description: "Absolute file path" } },
     required: ["path"],
   },
-  risk: "high" as const,
+  risk: "low" as const,
   async execute(params: any, _ctx: any) {
     await sleep(200);
     const path = params.path as string;
