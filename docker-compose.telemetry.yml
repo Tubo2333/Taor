@@ -1,0 +1,16 @@
+# docker-compose.telemetry.yml
+# One-command Jaeger for Taor trace visualization.
+#
+#   docker compose -f docker-compose.telemetry.yml up -d
+#   npx tsx examples/demo-telemetry.ts
+#   open http://localhost:16686  → search "taor"
+
+version: "3.8"
+services:
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"   # Jaeger UI
+      - "4317:4317"     # OTLP gRPC
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true

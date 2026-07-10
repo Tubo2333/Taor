@@ -2,7 +2,9 @@
   "name": "taor",
   "version": "0.1.0",
   "private": true,
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "description": "Taor — TypeScript Agent Orchestration Runtime. 12 packages, AsyncGenerator-based TAOR loop, 4-tier permission engine, sub-agent process isolation.",
   "scripts": {
     "build": "pnpm -r run build",
@@ -12,6 +14,10 @@
     "lint": "eslint packages/ --ext .ts"
   },
   "devDependencies": {
+    "@opentelemetry/api": "^1.9.1",
+    "@opentelemetry/auto-instrumentations-node": "^0.78.0",
+    "@opentelemetry/exporter-otlp-grpc": "^0.26.0",
+    "@opentelemetry/sdk-node": "^0.220.0",
     "tsx": "^4.19.0",
     "typescript": "^5.7.0",
     "vitest": "^3.0.0"
